@@ -1,16 +1,13 @@
 import React from 'react';
 import { 
-  Shield, 
-  Terminal, 
-  Activity, 
-  Crosshair, 
-  Layers, 
-  Briefcase, 
-  BookOpen, 
   Flame, 
   ArrowRight,
+  Laptop,
+  Terminal,
+  Activity,
+  Crosshair,
   FileCode,
-  Zap
+  Shield
 } from 'lucide-react';
 import { MONTHS_DATA, getFullCurriculum } from '../data/curriculumData';
 
@@ -158,58 +155,73 @@ export default function Dashboard({
         </div>
       </div>
 
-      {/* Interactive Simulators Grid */}
+      {/* Hands-On Practical Tool Guides */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Interactive Simulators</h2>
-          <span className="text-xs text-slate-500">Hands-on practice</span>
+          <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Hands-On Practical Guides</h2>
+          <button 
+            onClick={() => setActiveTab('guides')}
+            className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center gap-1"
+          >
+            <span>View All Guides</span>
+            <ArrowRight className="w-3 h-3" />
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           
           <div 
-            onClick={() => setActiveTab('siem')}
-            className="card-minimal card-minimal-hover rounded-xl p-3.5 cursor-pointer"
+            onClick={() => setActiveTab('guides')}
+            className="card-minimal card-minimal-hover rounded-xl p-4 cursor-pointer"
           >
             <Terminal className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
-            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">SIEM Log Hunter</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Query logs & filter Event IDs</p>
+            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Linux & WSL Log Forensics</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Filter auth.log, count failed SSH attempts & audit sudo.</p>
           </div>
 
           <div 
-            onClick={() => setActiveTab('wireshark')}
-            className="card-minimal card-minimal-hover rounded-xl p-3.5 cursor-pointer"
+            onClick={() => setActiveTab('guides')}
+            className="card-minimal card-minimal-hover rounded-xl p-4 cursor-pointer"
           >
             <Activity className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
-            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Packet Inspector</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Analyze PCAPs & TCP streams</p>
+            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Wireshark Packet Analysis</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Filter HTTP POSTs, analyze SYN scans & follow TCP streams.</p>
           </div>
 
           <div 
-            onClick={() => setActiveTab('owasp')}
-            className="card-minimal card-minimal-hover rounded-xl p-3.5 cursor-pointer"
-          >
-            <Crosshair className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
-            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">OWASP Lab</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">SQLi, XSS & IDOR testing</p>
-          </div>
-
-          <div 
-            onClick={() => setActiveTab('sandbox')}
-            className="card-minimal card-minimal-hover rounded-xl p-3.5 cursor-pointer"
-          >
-            <FileCode className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
-            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Script Sandbox</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Python log parsers & hashes</p>
-          </div>
-
-          <div 
-            onClick={() => setActiveTab('soc-triage')}
-            className="card-minimal card-minimal-hover rounded-xl p-3.5 cursor-pointer"
+            onClick={() => setActiveTab('guides')}
+            className="card-minimal card-minimal-hover rounded-xl p-4 cursor-pointer"
           >
             <Shield className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
-            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">SOC Alert Triage</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">Live alert investigations</p>
+            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Splunk SIEM SPL Hunting</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Query Event IDs 4625, 1102, and Sysmon encoded PowerShell.</p>
+          </div>
+
+          <div 
+            onClick={() => setActiveTab('guides')}
+            className="card-minimal card-minimal-hover rounded-xl p-4 cursor-pointer"
+          >
+            <Crosshair className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
+            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Burp Suite & OWASP Lab</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Test IDOR parameters & SQL injection auth bypass.</p>
+          </div>
+
+          <div 
+            onClick={() => setActiveTab('guides')}
+            className="card-minimal card-minimal-hover rounded-xl p-4 cursor-pointer"
+          >
+            <FileCode className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
+            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Python Security Automation</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Compute SHA-256 hashes & extract IP indicators with regex.</p>
+          </div>
+
+          <div 
+            onClick={() => setActiveTab('guides')}
+            className="card-minimal card-minimal-hover rounded-xl p-4 cursor-pointer"
+          >
+            <Laptop className="w-4 h-4 text-slate-700 dark:text-slate-300 mb-2" />
+            <h4 className="text-xs font-semibold text-slate-900 dark:text-white">Windows Sysmon Telemetry</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Install Sysmon and inspect Event ID 1 process creation.</p>
           </div>
 
         </div>

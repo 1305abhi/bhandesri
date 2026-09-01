@@ -6,13 +6,9 @@ import {
   Layers, 
   BookOpen, 
   Briefcase, 
-  Terminal, 
-  Activity, 
-  Crosshair, 
-  FileCode, 
+  Laptop, 
   Sun, 
   Moon, 
-  ChevronDown, 
   Clock, 
   Download, 
   Upload, 
@@ -33,29 +29,14 @@ export default function Navbar({
   onResetProgress,
   onSearchOpen
 }) {
-  const [isLabsOpen, setIsLabsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const labsRef = useRef(null);
   const moreRef = useRef(null);
-
-  const labItems = [
-    { id: 'siem', label: 'SIEM Log Hunter', icon: Terminal, desc: 'Query logs & detect events' },
-    { id: 'wireshark', label: 'Packet Inspector', icon: Activity, desc: 'Analyze PCAPs & TCP streams' },
-    { id: 'owasp', label: 'OWASP Playground', icon: Crosshair, desc: 'SQLi, XSS, and IDOR lab' },
-    { id: 'sandbox', label: 'Script Sandbox', icon: FileCode, desc: 'Python & Bash security scripts' },
-    { id: 'soc-triage', label: 'SOC Alert Triage', icon: Shield, desc: 'Live incident queue investigation' },
-  ];
-
-  const isLabActive = labItems.some(item => item.id === activeTab);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
     function handleClickOutside(e) {
-      if (labsRef.current && !labsRef.current.contains(e.target)) {
-        setIsLabsOpen(false);
-      }
       if (moreRef.current && !moreRef.current.contains(e.target)) {
         setIsMoreOpen(false);
       }
@@ -79,6 +60,14 @@ export default function Navbar({
     }
   };
 
+  const navLinks = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'roadmap', label: 'Roadmap' },
+    { id: 'guides', label: 'Practical Guides' },
+    { id: 'flashcards', label: 'Flashcards' },
+    { id: 'career', label: 'Career Hub' },
+  ];
+
   return (
     <header className="sticky top-0 z-50 bg-white/95 dark:bg-[#090d16]/95 backdrop-blur-sm border-b border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-6 py-2.5 transition-colors">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -96,98 +85,27 @@ export default function Navbar({
           </span>
         </div>
 
-        {/* Center: Clean 4 Core Tabs (Desktop) */}
+        {/* Center: 5 Clean Nav Links (Desktop) */}
         <nav className="hidden md:flex items-center gap-1">
-          <button
-            onClick={() => setActiveTab('dashboard')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              activeTab === 'dashboard'
-                ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
-            }`}
-          >
-            Dashboard
-          </button>
-
-          <button
-            onClick={() => setActiveTab('roadmap')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              activeTab === 'roadmap'
-                ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
-            }`}
-          >
-            Roadmap
-          </button>
-
-          {/* Simulators Dropdown */}
-          <div className="relative" ref={labsRef}>
-            <button
-              onClick={() => setIsLabsOpen(!isLabsOpen)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1 ${
-                isLabActive || isLabsOpen
-                  ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
-              }`}
-            >
-              <span>Simulators</span>
-              <ChevronDown className={`w-3 h-3 transition-transform ${isLabsOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {isLabsOpen && (
-              <div className="absolute left-0 mt-1.5 w-60 card-minimal rounded-xl p-1.5 shadow-lg z-50 animate-fadeIn space-y-0.5">
-                {labItems.map((item) => {
-                  const Icon = item.icon;
-                  const isCurrent = activeTab === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        setActiveTab(item.id);
-                        setIsLabsOpen(false);
-                      }}
-                      className={`w-full text-left p-2 rounded-lg transition-colors flex items-start gap-2.5 ${
-                        isCurrent 
-                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold' 
-                          : 'hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-xs font-medium">{item.label}</div>
-                        <div className="text-[10px] text-slate-400 font-normal">{item.desc}</div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          <button
-            onClick={() => setActiveTab('flashcards')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              activeTab === 'flashcards'
-                ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
-            }`}
-          >
-            Flashcards
-          </button>
-
-          <button
-            onClick={() => setActiveTab('career')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              activeTab === 'career'
-                ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
-            }`}
-          >
-            Career Hub
-          </button>
+          {navLinks.map((link) => {
+            const isActive = activeTab === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => setActiveTab(link.id)}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                  isActive
+                    ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                }`}
+              >
+                {link.label}
+              </button>
+            );
+          })}
         </nav>
 
-        {/* Right: Minimal 3 Controls */}
+        {/* Right: Minimal 4 Controls */}
         <div className="flex items-center gap-2">
           
           {/* Search Trigger */}
@@ -283,34 +201,22 @@ export default function Navbar({
       {/* Mobile Drawer Navigation Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden mt-2 pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-0.5 animate-fadeIn pb-1 text-xs">
-          {[
-            { id: 'dashboard', label: 'Dashboard', icon: Shield },
-            { id: 'roadmap', label: '90-Day Roadmap', icon: Layers },
-            { id: 'siem', label: 'SIEM Log Hunter', icon: Terminal },
-            { id: 'wireshark', label: 'Packet Inspector', icon: Activity },
-            { id: 'owasp', label: 'OWASP Lab', icon: Crosshair },
-            { id: 'sandbox', label: 'Script Sandbox', icon: FileCode },
-            { id: 'soc-triage', label: 'SOC Triage Queue', icon: Shield },
-            { id: 'flashcards', label: 'Active Flashcards', icon: BookOpen },
-            { id: 'career', label: 'Career Hub', icon: Briefcase },
-          ].map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
+          {navLinks.map((link) => {
+            const isActive = activeTab === link.id;
             return (
               <button
-                key={item.id}
+                key={link.id}
                 onClick={() => {
-                  setActiveTab(item.id);
+                  setActiveTab(link.id);
                   setIsMobileMenuOpen(false);
                 }}
-                className={`px-3 py-2 rounded-lg text-left font-medium transition-colors flex items-center gap-2.5 ${
+                className={`px-3 py-2 rounded-lg text-left font-medium transition-colors ${
                   isActive 
                     ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
                     : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                 }`}
               >
-                <Icon className="w-4 h-4 shrink-0 text-slate-500" />
-                <span>{item.label}</span>
+                {link.label}
               </button>
             );
           })}

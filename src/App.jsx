@@ -3,11 +3,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
 import RoadmapView from './components/RoadmapView';
 import ChapterReader from './components/ChapterReader';
-import SiemSimulator from './components/SiemSimulator';
-import WiresharkSimulator from './components/WiresharkSimulator';
-import OwaspPlayground from './components/OwaspPlayground';
-import ScriptingSandbox from './components/ScriptingSandbox';
-import SocAlertTriage from './components/SocAlertTriage';
+import LocalToolGuides from './components/LocalToolGuides';
 import FlashcardsDeck from './components/FlashcardsDeck';
 import CareerTransitionHub from './components/CareerTransitionHub';
 import QuizModal from './components/QuizModal';
@@ -27,7 +23,6 @@ export default function App() {
     saveChapterNote,
     toggleFlashcardMastery,
     addStudyTime,
-    markIncidentResolved,
     toggleLabCompleted,
     resetAllProgress,
     exportProgressJSON,
@@ -65,7 +60,7 @@ export default function App() {
   const selectedDayItem = allCurriculum.find(d => d.day === selectedDayNumber) || allCurriculum[0];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#070a13] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-sky-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-slate-900 selection:text-white dark:selection:bg-white dark:selection:text-slate-900">
       
       {/* Top Navbar */}
       <Navbar
@@ -84,7 +79,7 @@ export default function App() {
       />
 
       {/* Main Content View */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         
         {activeTab === 'dashboard' && (
           <Dashboard
@@ -118,27 +113,8 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'siem' && (
-          <SiemSimulator />
-        )}
-
-        {activeTab === 'wireshark' && (
-          <WiresharkSimulator />
-        )}
-
-        {activeTab === 'owasp' && (
-          <OwaspPlayground />
-        )}
-
-        {activeTab === 'sandbox' && (
-          <ScriptingSandbox />
-        )}
-
-        {activeTab === 'soc-triage' && (
-          <SocAlertTriage
-            progress={progress}
-            markIncidentResolved={markIncidentResolved}
-          />
+        {activeTab === 'guides' && (
+          <LocalToolGuides />
         )}
 
         {activeTab === 'flashcards' && (
@@ -186,13 +162,13 @@ export default function App() {
       <footer className="border-t border-slate-200 dark:border-slate-800/80 bg-white dark:bg-[#060810] py-6 px-4 text-center text-xs text-slate-500 font-mono transition-colors">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-sky-500" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span className="text-slate-700 dark:text-slate-300 font-bold">SOCReady Platform</span>
             <span>•</span>
             <span>Beginner to Job-Ready Cybersecurity & SOC Analyst Course</span>
           </div>
           <div>
-            <span>90 Days • 12 Weeks • 8 Competency Domains • Light & Dark Mode</span>
+            <span>90 Days • 12 Weeks • Step-by-Step Hands-On Guides • Light & Dark Mode</span>
           </div>
         </div>
       </footer>
