@@ -1,6 +1,6 @@
 /**
  * 50+ Curated Cyber Security / SOC Analyst Interview Questions with Answers,
- * Key Terminology, and QA-to-SOC Transition Framing.
+ * Key Terminology, and Structured Analyst Framing.
  */
 
 export const INTERVIEW_CATEGORIES = [
@@ -9,7 +9,7 @@ export const INTERVIEW_CATEGORIES = [
   'SOC & SIEM Operations',
   'Incident Response & Scenarios',
   'Web AppSec & OWASP',
-  'QA-to-Cyber Transition'
+  'Career Strategy & Motivation'
 ];
 
 export const INTERVIEW_QUESTIONS_DATA = [
@@ -119,19 +119,19 @@ export const INTERVIEW_QUESTIONS_DATA = [
     answer: '- HttpOnly: Tells the browser that JavaScript (`document.cookie`) cannot read the cookie, neutralizing cookie theft via XSS.\n- Secure: Instructs the browser to only transmit the cookie over encrypted HTTPS connections.\n- SameSite (Strict/Lax): Restricts cookie transmission in cross-site requests, mitigating Cross-Site Request Forgery (CSRF).'
   },
 
-  // --- QA-TO-CYBER TRANSITION ---
+  // --- CAREER STRATEGY & MOTIVATION ---
   {
     id: 'int-15',
-    category: 'QA-to-Cyber Transition',
-    question: 'Why are you transitioning from Software QA Testing to Cybersecurity Analysis?',
-    keywords: ['Adversarial Mindset', 'Defensive Depth', 'Root Cause', 'Security Case Studies'],
-    answer: 'In my QA testing career, my strongest asset was always finding the negative test cases, edge cases, and authorization gaps that others missed. While performing API testing with Postman and intercepting traffic in Burp Suite, I identified critical security issues like IDOR and lack of rate-limiting on OTP authentication. I realized that my passion lies in security and defense—understanding how adversaries operate and building resilient monitoring and detection systems. My testing discipline in writing detailed reproduction reports, analyzing logs, and understanding system architectures gives me an immediate advantage as a SOC Analyst.'
+    category: 'Career Strategy & Motivation',
+    question: 'What inspired you to pursue a career as a Cybersecurity & SOC Analyst?',
+    keywords: ['Adversarial Mindset', 'Defensive Depth', 'Root Cause', 'Continuous Learning', 'Hands-On Labs'],
+    answer: 'I have always been deeply passionate about understanding how complex systems operate under stress and how adversaries discover unintended bypasses. While analyzing web traffic, API access controls, and network logs in hands-on labs, I discovered my enthusiasm for defensive security—uncovering threat actor tradecraft, correlating telemetry across SIEM platforms, and building resilient detection mechanisms. My continuous hands-on practice in home labs (Wazuh, Splunk BOTS, Wireshark) and dedication to structured incident response methodologies prepares me to add immediate defensive value to a SOC team.'
   },
   {
     id: 'int-16',
-    category: 'QA-to-Cyber Transition',
-    question: 'How does your QA experience help you write better SOC incident reports?',
-    keywords: ['Reproduction Steps', 'Severity/Priority', 'Expected vs Actual', 'Timeline', 'Clarity'],
-    answer: 'In QA, high-quality bug reports require clear reproduction steps, exact expected vs actual behavior, and severity classification so developers can fix issues quickly. In a SOC, incident reports require the exact same structure: clear chronological timelines, exact artifacts (IPs, hashes, PIDs), impacted assets, severity rating, and actionable remediation steps for sysadmins and engineering teams.'
+    category: 'Career Strategy & Motivation',
+    question: 'How do you structure and document high-fidelity SOC incident reports?',
+    keywords: ['Chronological Timeline', 'Severity/Priority', 'Observed Artifacts', 'Impact Assessment', 'Remediation Steps'],
+    answer: 'A high-fidelity incident report must be clear, actionable, and structured for both technical responders and leadership:\n1. Executive Summary: High-level overview of the incident, impact, and current containment status.\n2. Chronological Timeline: Timestamped sequence of events from initial access to detection.\n3. Technical Artifacts (IOCs): Malicious IPs, domain names, file hashes (SHA-256), compromised user accounts, and affected hosts.\n4. Root Cause Analysis: How the vulnerability or intrusion occurred.\n5. Remediation & Hardening Actions: Exact steps taken for eradication, recovery, and long-term defensive recommendations to prevent recurrence.'
   }
 ];

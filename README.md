@@ -1,16 +1,39 @@
-# React + Vite
+# SOCReady | Beginner to Job-Ready Cyber Security & SOC Analyst Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A comprehensive 90-Day (12-Week) structured curriculum, hands-on security simulators, packet analysis tools, active recall flashcards, and interview preparation platform for mastering Cybersecurity and SOC Operations from scratch.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Key Platform Features
 
-## React Compiler
+- **📅 90-Day Structured Roadmap:** 12 weeks of day-by-day foundational to advanced defensive missions covering Networking, Linux/Windows administration, SIEM correlation, Packet Analysis, OWASP Top 10, and Incident Response.
+- **🖥️ SIEM Log Hunter & Query Simulator:** Practice realistic Splunk SPL / Elastic KQL queries across Windows Event Logs, Sysmon, and Linux authentication logs.
+- **🦈 Wireshark Packet & PCAP Inspector:** Inspect raw Layer 2-7 packet headers, analyze DNS tunneling, and follow full TCP stream sessions.
+- **🎯 OWASP Top 10 Security Playground:** Interactive vulnerability sandbox to test SQL Injection, XSS, IDOR, and Security Response Headers with defensive toggles.
+- **💻 Python & Bash Security Sandbox:** Execute modular log parsers, cryptographic hash generators, and port scanner scripts.
+- **🛡️ Tier 1 SOC Alert Triage Queue:** Investigate realistic enterprise security incident tickets, correlate threat intel, and submit analyst triage verdicts.
+- **🧠 Active Recall Flashcards Deck:** Spaced repetition decks for ports, Windows Event IDs, MITRE ATT&CK tactics, and incident response lifecycles.
+- **💼 Career & Interview Hub:** 50+ technical and scenario-based interview questions, home lab blueprints (Wazuh & Splunk BOTS), and technical resume strategy.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Frontend:** React 19, TailwindCSS v4, Lucide Icons, Canvas-Confetti, React-Markdown, Remark-GFM
+- **Build Tool:** Vite
+- **Deployment:** Vercel
+
+---
+
+## 🏃 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```

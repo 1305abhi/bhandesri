@@ -15,7 +15,8 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Lightbulb, 
-  Award 
+  Award,
+  ShieldCheck 
 } from 'lucide-react';
 import { QUIZZES_DATA } from '../data/quizData';
 import MarkdownRenderer from './MarkdownRenderer';
@@ -30,7 +31,7 @@ export default function ChapterReader({
   saveChapterNote,
   onOpenQuiz
 }) {
-  const [activeTab, setActiveTab] = useState('theory'); // 'theory', 'qa-bridge', 'code', 'cheatsheet', 'notes'
+  const [activeTab, setActiveTab] = useState('theory'); // 'theory', 'practical-context', 'code', 'cheatsheet', 'notes'
   const [copied, setCopied] = useState(false);
   const [noteText, setNoteText] = useState(progress.chapterNotes[`day-${dayItem.day}`] || '');
   const [noteSaved, setNoteSaved] = useState(false);
@@ -157,15 +158,15 @@ export default function ChapterReader({
         </button>
 
         <button
-          onClick={() => setActiveTab('qa-bridge')}
+          onClick={() => setActiveTab('practical-context')}
           className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
-            activeTab === 'qa-bridge'
+            activeTab === 'practical-context'
               ? 'bg-purple-600 text-white shadow-xs'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
           }`}
         >
-          <Lightbulb className="w-4 h-4" />
-          <span>QA-to-SOC Transition Bridge</span>
+          <ShieldCheck className="w-4 h-4" />
+          <span>Real-World SOC Application</span>
         </button>
 
         {dayItem.codeSnippet && (
@@ -214,24 +215,23 @@ export default function ChapterReader({
         </div>
       )}
 
-      {/* Tab 2: QA Transition Bridge */}
-      {activeTab === 'qa-bridge' && (
+      {/* Tab 2: Real-World SOC Application */}
+      {activeTab === 'practical-context' && (
         <div className="bg-white dark:bg-[#0c1024] border border-purple-200 dark:border-purple-500/30 rounded-3xl p-6 sm:p-8 space-y-6 card-subtle-shadow">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-purple-100 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/40 flex items-center justify-center text-purple-700 dark:text-purple-400">
-              <Lightbulb className="w-5 h-5" />
+              <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">How Your QA Background Connects Here</h2>
-              <p className="text-xs text-purple-700 dark:text-purple-300 font-medium">Translating testing experience into defensive cyber superpowers</p>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Real-World Security Mindset & Defender Context</h2>
+              <p className="text-xs text-purple-700 dark:text-purple-300 font-medium">Connecting foundational concepts directly to enterprise SOC analyst workflows</p>
             </div>
           </div>
 
           <div className="p-5 rounded-2xl bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20 text-slate-800 dark:text-slate-200 text-sm leading-relaxed space-y-3">
             <p className="font-semibold text-purple-900 dark:text-purple-200">{dayItem.qaBridge}</p>
             <p className="text-xs text-slate-600 dark:text-slate-300">
-              <strong>Recruiter Strategy Tip:</strong> When interviewers ask about your transition, cite this specific parallel. 
-              Explain that experienced QA engineers don\'t just verify "happy paths"—they design adversarial negative test cases to find unhandled exceptions, which is identical to how SOC threat hunters hypothesize adversary intrusion paths.
+              <strong>Interview & Recruiter Strategy Tip:</strong> When interviewers ask about this concept, demonstrate a proactive defender mindset by explaining both the detection methodology and how engineering teams remediate the vulnerability at root cause.
             </p>
           </div>
         </div>
@@ -282,7 +282,7 @@ export default function ChapterReader({
           <div className="bg-sky-50 dark:bg-[#0d1629] border border-sky-200 dark:border-cyan-500/30 rounded-3xl p-6 space-y-3 card-subtle-shadow">
             <h3 className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-sky-600 dark:text-cyan-400" />
-              <span>Today\'s Hands-On Mission</span>
+              <span>Today's Hands-On Mission</span>
             </h3>
             <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
               {dayItem.practicalExercise}

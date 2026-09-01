@@ -1,6 +1,6 @@
 /**
- * Comprehensive 90-Day (12-Week) QA-to-SOC / Cyber Security Analyst Mastery Curriculum.
- * Specially designed for software testers transitioning to defensive security / SOC analyst roles.
+ * Comprehensive 90-Day (12-Week) Beginner-to-Job-Ready Cyber Security & SOC Analyst Mastery Curriculum.
+ * Designed from the ground up for beginners seeking foundational mastery and entry-level cybersecurity analyst / SOC roles.
  */
 
 export const MONTHS_DATA = [
@@ -33,7 +33,7 @@ export const MONTHS_DATA = [
     subtitle: 'OWASP Top 10, Live Incident Playbooks, Home Labs & Interview Prep',
     theme: 'purple',
     icon: 'Crosshair',
-    goal: 'Leverage QA testing background into AppSec/OWASP mastery, triage live enterprise incident scenarios, build home lab portfolio, and crack interviews.',
+    goal: 'Master AppSec/OWASP vulnerabilities, triage live enterprise incident scenarios, build a standout home lab portfolio, and crack technical interviews.',
     weeks: [9, 10, 11, 12],
     domains: ['Web AppSec/OWASP', 'Incident Response', 'Home Labs', 'Interview Prep']
   }
@@ -53,7 +53,7 @@ export const CURRICULUM_DATA = [
     estimatedMinutes: 45,
     difficulty: 'Beginner',
     summary: 'Understand the foundational pillars of information security: Confidentiality, Integrity, Availability, and how they govern every defensive decision.',
-    qaBridge: 'In QA, you test for functionality ("Does clicking Save persist data?"). In Security, you test the CIA properties of that data ("Can unauthorized users see it? Can anyone tamper with it in transit? Is the database available under a flood of requests?").',
+    qaBridge: 'From a defensive security perspective, evaluating systems goes beyond normal operation: you must verify the core CIA properties ("Can unauthorized actors view this? Can it be tampered with in transit? Can an adversary flood it to cause downtime?").',
     theory: `
 ### What is Information Security?
 Information security is not about building impenetrable walls (which is impossible), but about managing risk and maintaining business operations despite adversarial threats. Every security tool, firewall rule, and SOC alert ultimately protects one or more vertices of the **CIA Triad**.
@@ -123,7 +123,7 @@ echo "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /etc/sha
     estimatedMinutes: 50,
     difficulty: 'Beginner',
     summary: 'Learn who the adversaries are, what drives their attacks (financial, political, espionage), and how they breach enterprise perimeter defenses.',
-    qaBridge: 'In QA, you build user personas (e.g. "Admin user", "Guest user"). In Cyber Security, you build Adversary Personas ("Ransomware Gang", "Malicious Insider", "Nation-State APT") to anticipate how each persona will stress-test your system.',
+    qaBridge: 'In threat modeling, security defenders build Adversary Personas ("Ransomware Groups", "Malicious Insiders", "Nation-State APTs") to anticipate attack paths and design targeted detection rules before an intrusion occurs.',
     theory: `
 ### Understanding the Adversary Spectrum
 To defend an enterprise network, a SOC Analyst must understand the adversary's capability, sophistication, and motivation.
@@ -187,7 +187,7 @@ check_ip_reputation("198.51.100.23")
     estimatedMinutes: 55,
     difficulty: 'Intermediate',
     summary: 'Master Symmetric vs Asymmetric encryption, one-way hashing algorithms, digital certificates, and the step-by-step TLS 1.3 cryptographic handshake.',
-    qaBridge: 'In QA, you send HTTPS requests in Postman or inspect padlock icons in DevTools. As a Security Analyst, you must understand how symmetric session keys are negotiated securely over an untrusted public network without eavesdroppers seeing them.',
+    qaBridge: 'Understanding modern web traffic requires knowing how symmetric session keys are negotiated securely over untrusted public networks using asymmetric key exchanges without eavesdroppers intercepting keys.',
     theory: `
 ### Cryptography Primer for Defenders
 
@@ -245,7 +245,7 @@ echo | openssl s_client -connect github.com:443 2>/dev/null | openssl x509 -noou
     estimatedMinutes: 40,
     difficulty: 'Beginner',
     summary: 'Explore layered defensive models: Perimeter, Network, Host, Application, and Data security layers, and zero-trust principles.',
-    qaBridge: 'In QA, if one validation check fails, the app might crash. In Security Defense in Depth, if the perimeter firewall is bypassed, the endpoint EDR, network segmentation, and database encryption still prevent the attacker from achieving their goal.',
+    qaBridge: 'Defense in Depth ensures that no single failure compromises an enterprise: if a perimeter firewall is bypassed, endpoint EDR, network segmentation, and database encryption still prevent an attacker from reaching critical assets.',
     theory: `
 ### The Castle Principle: Defense in Depth
 Defense in Depth is a security strategy where multiple redundant defensive layers are implemented across an IT environment. If an attacker penetrates one layer, subsequent layers prevent total compromise.
@@ -300,7 +300,7 @@ find / -perm -u=s -type f 2>/dev/null
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'Dissect the 7 Layers of the OSI model and 4 layers of TCP/IP. Learn how packets encapsulate and where specific cyber attacks and defensive controls live.',
-    qaBridge: 'In QA, you deal mostly with Layer 7 (HTTP responses, JSON payloads). In SOC analysis, you must drill down to Layer 3 (IP spoofing, geo-blocking) and Layer 4 (TCP flags, SYN floods, port scans) to identify intrusions.',
+    qaBridge: 'While web applications operate primarily at Layer 7 (HTTP/JSON), a SOC analyst must inspect Layer 3 (IP spoofing, routing) and Layer 4 (TCP flags, SYN floods, port scans) to identify malicious traffic on the wire.',
     theory: `
 ### The 7 Layers of OSI & Where Attacks Strike
 
@@ -356,7 +356,7 @@ route print      # Windows
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'Master the top 20 ports every SOC analyst must know by heart, the mechanics of SYN/SYN-ACK/ACK, and TCP termination.',
-    qaBridge: 'In QA, you connect to localhost:3000 or staging API port 8080. In SOC investigations, seeing outbound traffic on Port 445 (SMB) or Port 3389 (RDP) to an external IP indicates immediate lateral movement or ransomware spread.',
+    qaBridge: 'Understanding default network ports is vital for SOC analysts: seeing outbound traffic on Port 445 (SMB) or Port 3389 (RDP) to an external public IP is an immediate indicator of lateral movement or ransomware propagation.',
     theory: `
 ### The TCP 3-Way Handshake (Crucial SOC Concept)
 Before any reliable data transmission occurs over TCP, a 3-way handshake is established:
@@ -425,7 +425,7 @@ netstat -ano | findstr ESTABLISHED
     estimatedMinutes: 50,
     difficulty: 'Intermediate',
     summary: 'Demystify CIDR calculations (/24, /16), Private RFC 1918 IP ranges, NAT, and Stateful vs Stateless Firewalls.',
-    qaBridge: 'In QA, you test in environments like 10.0.0.x or 192.168.x.x. In a SOC, recognizing whether an IP is internal (Private RFC 1918) vs external public routable determines if you are investigating internal lateral movement or external data exfiltration.',
+    qaBridge: 'Recognizing whether an IP is internal (Private RFC 1918) vs external public routable immediately determines whether an analyst is investigating internal lateral movement or external data exfiltration.',
     theory: `
 ### RFC 1918: Private (Non-Routable) IP Address Ranges
 These ranges are reserved for internal networks and NEVER route across the public internet:
@@ -484,7 +484,7 @@ sudo ufw status verbose
     estimatedMinutes: 50,
     difficulty: 'Intermediate',
     summary: 'Tour the Linux root filesystem from a security perspective: /etc, /var/log, /proc, /tmp, and why adversaries love hiding in /tmp and /dev/shm.',
-    qaBridge: 'In QA, you might check app logs in `/var/log/app.log`. In Incident Response, `/var/log/auth.log` and `/var/log/syslog` contain the exact forensic breadcrumbs of attacker SSH logins, privilege escalations, and persistence mechanisms.',
+    qaBridge: 'Linux system logs in `/var/log/auth.log` and `/var/log/syslog` contain the exact forensic breadcrumbs of attacker SSH login attempts, privilege escalation commands, and persistence mechanisms.',
     theory: `
 ### The Linux Directory Structure for Threat Hunters
 
@@ -538,7 +538,7 @@ grep -v "nologin\\|false" /etc/passwd
     estimatedMinutes: 65,
     difficulty: 'Intermediate',
     summary: 'Master the core command-line toolchain: grep, awk, sed, cut, sort, uniq -c to parse 100,000 log lines in seconds and extract attacker IPs.',
-    qaBridge: 'Automating log searches in Bash is just like writing automated test assertions—instead of manually scanning logs, you write a one-liner to filter out noise and extract anomalies.',
+    qaBridge: 'Automating log searches in Bash allows analysts to filter through gigabytes of raw server logs in seconds, extracting high-value indicators of compromise without manual scanning.',
     theory: `
 ### The Power of the Unix Pipe Pipeline \`|\`
 As a SOC Analyst, you will frequently be given a raw 500MB web server log or SSH authentication log and asked: *"Which IP attacked us, and how many attempts did they make?"*
@@ -599,7 +599,7 @@ grep -i -E "(union.*select|select.*from|'--|%27)" access.log
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'Understand Active Directory Domain Services (AD DS), Domain Controllers, Kerberos Ticket Granting (TGT/TGS), and common AD attack vectors.',
-    qaBridge: 'In QA, you test user roles and permissions on a single web app. In enterprise IT, Active Directory is the centralized identity brain that controls access to 10,000+ employee laptops, servers, email, and files.',
+    qaBridge: 'Active Directory is the centralized identity brain of modern enterprise networks. Gaining domain admin access allows adversaries to control thousands of workstations, servers, and files simultaneously.',
     theory: `
 ### What is Active Directory?
 Active Directory (AD) is Microsoft's directory service used by 90%+ of Fortune 500 enterprises to centrally manage users, computers, security policies (GPO), and access controls across a domain.
@@ -659,7 +659,7 @@ Get-ADDefaultDomainPasswordPolicy
     estimatedMinutes: 65,
     difficulty: 'Intermediate',
     summary: 'Master the top 15 Windows Security Event IDs every SOC analyst must know by heart: 4624 (Logon), 4625 (Failed Logon), 4720 (User Created), 7045 (Service Installed).',
-    qaBridge: 'In QA, you check application error logs when a test fails. In a SOC, Windows Security Event Logs are the courtroom evidence used to prove who logged into a machine, what time they arrived, and what process they executed.',
+    qaBridge: 'Windows Security Event Logs serve as digital courtroom evidence for incident responders, establishing exact timelines of who logged into an endpoint, when they connected, and what processes they executed.',
     theory: `
 ### The Core Windows Event Channels
 1. **Security (\`Security.evtx\`):** Authentication, account changes, privilege use, object access.
@@ -718,7 +718,7 @@ Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4625} -MaxEvents 50 |
     estimatedMinutes: 55,
     difficulty: 'Intermediate',
     summary: 'Understand how a 24/7 Security Operations Center works, the roles of Tier 1, 2, and 3 analysts, and the NIST SP 800-61 / SANS 6-step Incident Response framework.',
-    qaBridge: 'In QA, you follow a Defect Lifecycle (New -> Assigned -> In Progress -> Retest -> Closed). In a SOC, you follow the Incident Response Lifecycle (Preparation -> Detection -> Containment -> Eradication -> Recovery -> Post-Incident Lessons Learned).',
+    qaBridge: 'Every security incident follows a structured lifecycle (Preparation -> Detection -> Containment -> Eradication -> Recovery -> Lessons Learned) to ensure swift containment and prevent repeat intrusions.',
     theory: `
 ### SOC Hierarchy & Roles
 * **Tier 1 (SOC Analyst / Triage):** Monitors incoming SIEM alerts, filters out false positives, enriches alerts with threat intelligence, and escalates true incidents within SLA (Service Level Agreement - e.g. 15 minutes).
@@ -775,7 +775,7 @@ Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4625} -MaxEvents 50 |
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'Master the Lockheed Martin Cyber Kill Chain and navigate the MITRE ATT&CK matrix: Tactics (the "Why") vs Techniques (the "How").',
-    qaBridge: 'In QA, you map test cases to user stories in Jira. In Cyber Security, you map observed attacker behaviors and detection rules to MITRE ATT&CK Tactics & Techniques.',
+    qaBridge: 'The MITRE ATT&CK framework allows analysts to translate raw detection alerts into standardized adversary tactics and techniques, enabling defense teams to identify gaps in detection coverage.',
     theory: `
 ### Lockheed Martin Cyber Kill Chain (7 Phases)
 1. **Reconnaissance:** Harvesting email addresses, scanning open ports, OSINT.
@@ -833,7 +833,7 @@ cat /etc/passwd | cut -d: -f1 # Linux: Enumerate local users
     estimatedMinutes: 50,
     difficulty: 'Intermediate',
     summary: 'Understand Indicators of Compromise (IOCs), threat feeds, and David Bianco\'s Pyramid of Pain (Hash Values -> TTPs).',
-    qaBridge: 'In QA, you log bug reproduction steps. In Threat Intelligence, you extract Indicators of Compromise (hashes, IPs, malicious domains) so your detection systems automatically alert whenever that artifact appears anywhere in the enterprise.',
+    qaBridge: 'Threat Intelligence extraction allows analysts to convert observed malicious artifacts (file hashes, IPs, domains) into enterprise-wide detection rules that automatically alert on future attack attempts.',
     theory: `
 ### David Bianco\'s Pyramid of Pain
 The Pyramid of Pain illustrates how difficult it is for an adversary to change their indicator when a security team blocks it.
@@ -894,7 +894,7 @@ def check_file_hash_vt(file_hash, api_key):
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'What is a SIEM? Understand Splunk, Elastic/ELK, Microsoft Sentinel, and Wazuh log collectors, forwarders, indexers, and correlation rules.',
-    qaBridge: 'In QA testing, you look at test reporting dashboards. In security operations, the SIEM is your single pane of glass that ingests gigabytes of logs per second from thousands of endpoints, firewalls, and servers to surface anomalies.',
+    qaBridge: 'A SIEM is the central nervous system of a SOC, ingesting millions of event logs per second across servers, firewalls, and endpoints to correlate patterns and trigger high-priority alerts.',
     theory: `
 ### What is a SIEM?
 **SIEM** stands for **Security Information and Event Management**. It provides:
@@ -937,7 +937,7 @@ tail -n 1 /var/log/syslog
     estimatedMinutes: 65,
     difficulty: 'Intermediate',
     summary: 'Master Splunk Search Processing Language (SPL) and Microsoft Kusto Query Language (KQL) to write powerful threat hunting queries.',
-    qaBridge: 'If you know SQL (SELECT * FROM users WHERE status = "fail"), writing Splunk SPL and KQL is essentially writing SQL queries against streaming log events.',
+    qaBridge: 'Writing SIEM search queries in SPL or KQL is similar to writing database queries against real-time streaming security logs to isolate anomalies from background noise.',
     theory: `
 ### Core Splunk SPL Commands
 Every SPL query begins with search criteria, followed by pipe \`|\` operators that manipulate the dataset:
@@ -1000,7 +1000,7 @@ index=firewall action=allowed dest_port NOT IN (80, 443, 53, 123)
     estimatedMinutes: 65,
     difficulty: 'Intermediate',
     summary: 'Master Wireshark packet capture analysis: display filters, TCP stream reassembly, extracting cleartext credentials, and spotting DNS tunneling.',
-    qaBridge: 'In QA, you inspect network payloads using browser DevTools Network tab. Wireshark is DevTools on steroids—it captures every single raw packet on the wire, including non-HTTP protocols like DNS, ARP, and TCP handshakes.',
+    qaBridge: 'Wireshark enables deep packet inspection by capturing raw frames on the network wire, allowing analysts to inspect protocol handshakes, DNS queries, and cleartext payloads directly.',
     theory: `
 ### Wireshark Layout & Essential Workflow
 1. **Packet List Pane:** Shows packet number, time, source IP, destination IP, protocol, length, and info.
@@ -1049,7 +1049,7 @@ tshark -r capture.pcap -Y "dns.flags.response == 0" -T fields -e dns.qry.name | 
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'Learn practical Python for SOC analysts: socket programming, regular expressions for log parsing, hashing with hashlib, and calling Threat Intel REST APIs.',
-    qaBridge: 'If you have written test automation scripts in Python (Selenium/PyTest) or JavaScript (Cypress), writing Python security automation is virtually identical—parsing data, testing assertions, and making API requests.',
+    qaBridge: 'Python security automation allows analysts to automate repetitive SOC workflows: querying threat intel APIs, parsing unstructured logs, and calculating cryptographic hashes at scale.',
     theory: `
 ### Why Python is the #1 Language for Security Analysts
 SOC Analysts write Python scripts to:
@@ -1122,7 +1122,7 @@ for ip, count in counts.items():
     estimatedMinutes: 55,
     difficulty: 'Intermediate',
     summary: 'Master web security architecture: Cookies (HttpOnly, Secure, SameSite), JWT token vulnerabilities, CORS, and defensive HTTP Security Headers (CSP, HSTS, X-Frame-Options).',
-    qaBridge: 'In QA, you test that auth tokens allow users to navigate between pages. In Security, you test what happens if a cookie lacks the HttpOnly flag (stolen via XSS) or if a JWT has "alg": "none" (forged authentication).',
+    qaBridge: 'Web security analysts evaluate what happens when protective browser flags are missing, such as cookies lacking HttpOnly flags (vulnerable to XSS) or JWT tokens with weak algorithms.',
     theory: `
 ### Securing Web Authentication & Cookies
 Cookies store session tokens. Without proper security flags, attackers can steal them:
@@ -1168,7 +1168,7 @@ Set-Cookie: session_id=abc123xyz; Path=/; Secure; HttpOnly; SameSite=Strict
     estimatedMinutes: 65,
     difficulty: 'Intermediate',
     summary: 'Deep dive into the most dangerous web vulnerabilities: SQL Injection, Cross-Site Scripting (Reflected/Stored), and Insecure Direct Object References (IDOR).',
-    qaBridge: 'Your portfolio already shows case studies on IDOR and auth flaw discovery! In an enterprise SOC / AppSec role, you bridge the gap by explaining both how the vulnerability is exploited and how the engineering team must fix it in code (e.g. Parameterized Queries, Server-side RBAC).',
+    qaBridge: 'In AppSec and SOC triage, identifying flaws like IDOR or SQL injection requires understanding both how adversaries bypass controls and how development teams remediate them using parameterized queries and server-side RBAC.',
     theory: `
 ### 1. SQL Injection (SQLi)
 * **How it happens:** Untrusted user input is directly concatenated into a backend SQL database query string without sanitization or parameterized binding.
@@ -1220,7 +1220,7 @@ SELECT * FROM accounts WHERE acc_num = '1001' OR '1'='1';
     estimatedMinutes: 65,
     difficulty: 'Intermediate',
     summary: 'Master the end-to-end phishing triage playbook: analyzing RFC 822 email headers, verifying SPF, DKIM, and DMARC, detonating attachments, and extracting malicious URLs.',
-    qaBridge: 'In QA, you verify that emails sent by the system have correct templates and links. In Phishing Forensics, you inspect the raw email MIME structure to prove the sender domain was spoofed and find the credential-harvesting server.',
+    qaBridge: 'In email and phishing forensics, analysts inspect raw email MIME headers and SPF/DKIM/DMARC records to prove sender spoofing and trace phishing infrastructure.',
     theory: `
 ### Email Authentication Protocols (Must Know for Interviews!)
 1. **SPF (Sender Policy Framework):** DNS TXT record listing which mail server IP addresses are authorized to send email on behalf of a domain.
@@ -1271,7 +1271,7 @@ Subject: URGENT: Complete Mandatory Security Update Before 5 PM
     estimatedMinutes: 60,
     difficulty: 'Intermediate',
     summary: 'Step-by-step blueprints to build an enterprise-grade home cybersecurity lab on your PC using VirtualBox / VMware, Wazuh SIEM, and Splunk Free.',
-    qaBridge: 'Setting up a home security lab is identical to setting up a local QA testing environment—spinning up VMs, configuring networks, installing agent software, and generating test data.',
+    qaBridge: 'Setting up a virtualized home SOC lab allows you to safely generate attack traffic, test endpoint agents (Wazuh/Sysmon), and build concrete portfolio experience on real systems.',
     theory: `
 ### Why a Home Lab Guarantees Job Offers for Freshers
 When interviewers speak with entry-level candidates, 90% have only theoretical knowledge. Having a working **Home SOC Lab** documented on your GitHub/Portfolio proves:
@@ -1319,28 +1319,26 @@ sudo bash ./wazuh-install.sh -a
     day: 87,
     week: 12,
     month: 3,
-    title: 'QA-to-SOC Resume Strategy: Framing Testing as Security Superpower',
+    title: 'Junior SOC Analyst Resume Strategy: Building a Standout Technical Profile',
     category: 'Interview Prep',
     estimatedMinutes: 50,
     difficulty: 'Beginner',
-    summary: 'Transform your QA testing background into high-value cybersecurity assets: defect reporting -> incident reports, edge case hunting -> threat modeling, API testing -> web security validation.',
-    qaBridge: 'You are NOT starting from zero. You already know SDLC, bug triage, Postman, Burp Suite, DevTools, and regression testing. This chapter shows you how to write resume bullet points that make recruiters notice you.',
+    summary: 'Craft a high-impact technical cybersecurity resume highlighting hands-on lab projects, SIEM hunting, incident triage playbooks, and core defensive competencies.',
+    qaBridge: 'When applying for entry-level cybersecurity analyst positions, your hands-on home lab experience, tool proficiency (Splunk, Wireshark, Burp Suite), and structured triage methodology make you stand out to technical recruiters.',
     theory: `
-### How to Translate QA Experience into SOC Analyst Gold
+### How to Build a Standout Entry-Level Cybersecurity Resume
 
-| Traditional QA Testing Term | High-Value Cybersecurity Translation |
+| Core Security Competency | High-Impact Resume & Interview Translation |
 | :--- | :--- |
-| Writing Bug Reports | **Authoring High-Fidelity Incident & Defect Triage Reports with Severity Classification** |
-| Postman API Testing | **API Security Assessment, Authentication Bypass & Rate-Limiting Testing** |
-| Burp Suite Interception | **Web Traffic Inspection, Parameter Tampering & Access Control (IDOR) Validation** |
-| Edge-case & Boundary Testing | **Threat Modeling, Negative Input Fuzzing & Security Exception Handling** |
-| Regression Testing | **Security Verification Testing & Patch Validation Post-Remediation** |
-| Agile & Sprint Collaboration | **SOC Incident Escalation SLA Compliance & Cross-Functional Engineering Collaboration** |
+| **SIEM & Log Correlation** | **Ingested and parsed multi-source logs in Splunk/Wazuh; authored correlation rules to detect brute-force & persistence** |
+| **Packet Forensics** | **Reconstructed multi-stage intrusion traffic in Wireshark and extracted malicious IOCs** |
+| **Web Vulnerability Auditing** | **Identified and documented OWASP Top 10 vulnerabilities (IDOR, SQLi, XSS) with root-cause remediations** |
+| **Threat Intelligence** | **Extracted IOCs, mapped attacker behaviors to MITRE ATT&CK, and automated hash checks with Python** |
 
 ---
 
-### Winning Resume Summary Formula for Your Background
-*"Cybersecurity Analyst & former Software QA Tester with strong foundations in Network Security, SIEM Log Analysis (Splunk/Wazuh), Packet Inspection (Wireshark), and Web Vulnerability Assessment (OWASP Top 10). Proven track record discovering high-severity authorization flaws (IDOR) and authentication vulnerabilities in production APIs. Experienced in building home SOC detection pipelines and investigating incident alert lifecycles."*
+### Winning Professional Summary Formula
+*"Cybersecurity Analyst with strong practical expertise in Network Defense, SIEM Log Correlation (Splunk & Wazuh), Packet Inspection (Wireshark), Endpoint Telemetry (Sysmon), and Web Vulnerability Assessment (OWASP Top 10). Proven track record analyzing authentication anomalies, brute-force intrusions, and API authorization flaws. Experienced in architecting virtualized home SOC detection pipelines and investigating incident alert lifecycles."*
     `,
     codeSnippet: {
       language: 'markdown',
@@ -1351,9 +1349,9 @@ sudo bash ./wazuh-install.sh -a
 - Authored automated Python log parsing scripts to process authentication logs and extract malicious IPs based on attack frequency thresholds.
 `
     },
-    practicalExercise: 'Open the Career Hub tab in the app to view and copy the complete QA-to-SOC transition resume template.',
+    practicalExercise: 'Open the Career Hub tab in the app to view and copy the complete technical cybersecurity resume template.',
     cheatSheet: [
-      { key: 'Key Advantage', val: 'QA mindset = finding what breaks; Security mindset = finding what bypasses' },
+      { key: 'Key Advantage', val: 'Demonstrating hands-on home lab and triage methodology in interviews' },
       { key: 'Tools to Highlight', val: 'Burp Suite, Postman, Wireshark, Splunk/Wazuh, Linux CLI, Python' },
       { key: 'Certifications to Target', val: 'CompTIA Security+, Microsoft SC-200, BTL1 (Blue Team Level 1)' }
     ],
@@ -1368,7 +1366,7 @@ sudo bash ./wazuh-install.sh -a
     estimatedMinutes: 70,
     difficulty: 'Intermediate',
     summary: 'Master the top technical, behavioral, and scenario-based interview questions asked in SOC Analyst Tier 1 / Junior Cybersecurity interviews.',
-    qaBridge: 'Just as in QA interviews where you are asked "How do you test a pen or login page?", in SOC interviews you will be asked "You see a high alert for 100 failed logins followed by 1 successful login—what do you do?"',
+    qaBridge: 'In technical SOC interviews, interviewers assess your step-by-step problem solving. For example: "You receive an alert for 100 failed logins followed by 1 success—what are your immediate triage steps?"',
     theory: `
 ### The Top 5 Core SOC Technical Interview Questions
 
@@ -1519,7 +1517,7 @@ export function getFullCurriculum() {
 
     { d: 85, w: 12, m: 3, cat: 'Home Labs', t: 'Building Your Home SOC Lab (Wazuh, Splunk & Wireshark)' },
     { d: 86, w: 12, m: 3, cat: 'Home Labs', t: 'Executing Attacks & Generating Telemetry in Your Home Lab' },
-    { d: 87, w: 12, m: 3, cat: 'Interview Prep', t: 'QA-to-SOC Resume Strategy: Framing Testing as Security Superpower' },
+    { d: 87, w: 12, m: 3, cat: 'Interview Prep', t: 'Junior SOC Analyst Resume Strategy: Building a Standout Technical Profile' },
     { d: 88, w: 12, m: 3, cat: 'Interview Prep', t: 'LinkedIn & GitHub Portfolio Optimization for Cyber Roles' },
     { d: 89, w: 12, m: 3, cat: 'Interview Prep', t: 'Behavioral & Scenario-Based SOC Interview Strategies' },
     { d: 90, w: 12, m: 3, cat: 'Interview Prep', t: 'Top 50 SOC Analyst Interview Questions & Mock Scenario Simulator' }
@@ -1539,7 +1537,7 @@ export function getFullCurriculum() {
         estimatedMinutes: 50,
         difficulty: item.m === 1 ? 'Beginner' : 'Intermediate',
         summary: `Comprehensive chapter on ${item.t}. Master key defensive principles, hands-on commands, and investigation techniques.`,
-        qaBridge: `Leverage your analytical testing skills to observe edge cases and validate system assertions in ${item.cat}.`,
+        qaBridge: `Apply core defensive principles and structured analytical methodology to investigate ${item.cat}.`,
         theory: `
 ### ${item.t}
 

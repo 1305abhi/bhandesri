@@ -189,7 +189,7 @@ export default function App() {
             <span className="w-2 h-2 rounded-full bg-sky-500" />
             <span className="text-slate-700 dark:text-slate-300 font-bold">SOCReady Platform</span>
             <span>•</span>
-            <span>QA to Cyber Security Analyst Accelerator</span>
+            <span>Beginner to Job-Ready Cybersecurity & SOC Analyst Course</span>
           </div>
           <div>
             <span>90 Days • 12 Weeks • 8 Competency Domains • Light & Dark Mode</span>

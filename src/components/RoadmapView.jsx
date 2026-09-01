@@ -93,7 +93,7 @@ export default function RoadmapView({
             <span>90-Day Daily Learning Roadmap</span>
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Structured day-by-day path from QA tester to entry-level cybersecurity & SOC analyst.
+            Structured day-by-day path from beginner fundamentals to entry-level cybersecurity & SOC analyst.
           </p>
         </div>
 

@@ -79,9 +79,9 @@ export default function Navbar({
           <div>
             <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-wider font-mono">SOC<span className="text-sky-600 dark:text-cyan-400">READY</span></span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-sky-100 dark:bg-cyan-950 border border-sky-300 dark:border-cyan-500/40 text-sky-700 dark:text-cyan-300 font-mono font-bold">QA → SOC</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-sky-100 dark:bg-cyan-950 border border-sky-300 dark:border-cyan-500/40 text-sky-700 dark:text-cyan-300 font-mono font-bold">ZERO → SOC</span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">3-Month Cyber Security Accelerator</p>
+            <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">Beginner to Job-Ready Cybersecurity Course</p>
           </div>
         </div>
 

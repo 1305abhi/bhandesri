@@ -64,16 +64,15 @@ export default function Dashboard({
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 dark:bg-cyan-500/10 border border-sky-300 dark:border-cyan-500/30 text-sky-800 dark:text-cyan-300 text-xs font-mono font-semibold">
               <Sparkles className="w-3.5 h-3.5 text-sky-600 dark:text-cyan-400" />
-              <span>QA Tester → Junior SOC Analyst Roadmap</span>
+              <span>Beginner to Job-Ready Cybersecurity & SOC Analyst Roadmap</span>
             </div>
             
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Transform Your QA Background into <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-teal-300 dark:to-blue-400">Cyber Defense Mastery</span>
+              Master Modern Cyber Defense & <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-teal-300 dark:to-blue-400">SOC Operations From Scratch</span>
             </h1>
             
             <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              You already know how systems break, how APIs communicate, and how to spot edge cases. 
-              Over the next 90 days, we connect your testing mindset directly to log hunting, packet inspection, SIEM alert triage, and enterprise threat detection.
+              Start with absolute fundamentals—TCP/IP networking, Linux terminal mastery, Windows Active Directory—and advance into enterprise SIEM log hunting, packet capture analysis, threat intelligence, and live incident triage over 90 structured daily missions.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -131,7 +130,7 @@ export default function Dashboard({
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Layers className="w-5 h-5 text-sky-600 dark:text-cyan-400" />
-            <span>The 3-Month Transition Blueprint</span>
+            <span>The 3-Month Comprehensive Learning Curriculum</span>
           </h2>
           <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">12 Weeks • 90 Daily Missions</span>
         </div>
@@ -189,7 +188,7 @@ export default function Dashboard({
             <Zap className="w-5 h-5 text-amber-500 dark:text-amber-400" />
             <span>Defensive Simulators & Interactive Labs</span>
           </h2>
-          <span className="text-xs text-slate-500 dark:text-slate-400">Practice enterprise SOC tools in browser</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">Practice enterprise SOC tools directly in your browser</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
@@ -288,11 +287,11 @@ export default function Dashboard({
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 text-[11px] font-mono font-bold">
             <Award className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span>Interview & Resume Ready</span>
+            <span>Interview & Job Ready</span>
           </div>
-          <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">How to Market Your QA Experience to Cyber Recruiters</h3>
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">How to Stand Out in Entry-Level Cybersecurity Interviews</h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
-            Access pre-written QA-to-SOC resume bullet points, home lab setup blueprints (Wazuh & Splunk BOTS), and 50+ technical interview questions with model answers.
+            Access pre-written technical resume bullet points, hands-on home lab setup blueprints (Wazuh & Splunk BOTS), and 50+ technical & scenario interview questions with model answers.
           </p>
         </div>
 
@@ -301,7 +300,7 @@ export default function Dashboard({
           className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs flex items-center gap-2 whitespace-nowrap shadow-md shadow-purple-600/20 transition-all hover:scale-105 shrink-0"
         >
           <Briefcase className="w-4 h-4" />
-          <span>Open Career Transition Hub</span>
+          <span>Open Career Hub</span>
         </button>
       </div>
 

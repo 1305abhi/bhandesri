@@ -27,20 +27,20 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
 
   const resumeBullets = [
     {
-      title: 'API Security & Authorization Testing',
-      bullet: 'Evaluated enterprise API authorization controls using Postman and Burp Suite; discovered critical Broken Object Level Authorization (IDOR) and OTP rate-limiting vulnerabilities, authoring detailed reproduction workflows prior to production rollout.'
+      title: 'SIEM Log Correlation & Incident Detection',
+      bullet: 'Architected and monitored a virtualized security operations pipeline using Wazuh SIEM, Splunk, and Windows Sysmon; authored custom correlation queries to detect brute-force logons (Event 4625), Mimikatz credential dumping, and obfuscated PowerShell execution.'
     },
     {
-      title: 'Home SOC Telemetry & SIEM Engineering',
-      bullet: 'Architected a virtualized enterprise security monitoring lab utilizing Wazuh SIEM and Windows Sysmon; authored custom XML correlation rules to detect brute-force logons, Mimikatz credential dumping, and obfuscated PowerShell execution.'
+      title: 'Network Packet Forensics & Traffic Inspection',
+      bullet: 'Investigated enterprise attack captures in Wireshark and Splunk SPL using Boss of the SOC (BOTS); reconstructed multi-stage intrusion timelines, extracted malicious IP/domain IOCs, and mapped adversary tradecraft to the MITRE ATT&CK matrix.'
     },
     {
-      title: 'Network Traffic & Incident Investigation',
-      bullet: 'Investigated enterprise attack captures in Wireshark and Splunk SPL using Boss of the SOC (BOTS); reconstructed multi-stage intrusion timelines, extracted malicious IOCs, and mapped adversary tradecraft to the MITRE ATT&CK matrix.'
+      title: 'Web Application Security & Vulnerability Assessment',
+      bullet: 'Evaluated enterprise web and API authorization controls using Burp Suite and Postman; identified and documented critical Broken Object Level Authorization (IDOR), SQL injection, and rate-limiting vulnerabilities prior to production deployment.'
     },
     {
       title: 'Defensive Security Scripting & Automation',
-      bullet: 'Authored Python security automation scripts utilizing regular expressions to parse authentication logs, calculate cryptographic SHA-256 hashes, and automate threat intelligence enrichment via REST APIs.'
+      bullet: 'Authored modular Python security scripts utilizing regular expressions to parse authentication logs, calculate cryptographic SHA-256 hashes, and automate threat intelligence enrichment via REST APIs.'
     }
   ];
 
@@ -69,7 +69,7 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
             <span className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse" />
             <h1 className="text-xl font-bold text-slate-900 dark:text-white font-mono flex items-center gap-2">
               <Briefcase className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-              <span>QA-TO-CYBER CAREER & INTERVIEW ACCELERATOR</span>
+              <span>CYBERSECURITY ANALYST CAREER & INTERVIEW ACCELERATOR</span>
             </h1>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -113,14 +113,14 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
               <span>Recommended Resume Professional Summary Formula</span>
             </h2>
             <div className="p-5 rounded-2xl bg-purple-50/70 dark:bg-slate-950 border border-purple-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed font-sans font-medium">
-              "Cybersecurity Analyst with a strong background in QA testing, Network Defense, SIEM Log Analysis (Splunk & Wazuh), Packet Inspection (Wireshark), and Web Vulnerability Assessment (OWASP Top 10). Proven track record identifying high-severity API authorization flaws (IDOR) and authentication vulnerabilities in production applications. Experienced in architecting virtualized home SOC detection pipelines and investigating incident alert lifecycles."
+              "Cybersecurity Analyst with strong practical foundations in Network Defense, SIEM Log Correlation (Splunk & Wazuh), Packet Inspection (Wireshark), Endpoint Telemetry (Sysmon), and Web Vulnerability Assessment (OWASP Top 10). Proven track record analyzing authentication anomalies, brute-force intrusions, and API authorization flaws. Experienced in architecting virtualized home SOC detection pipelines and investigating incident alert lifecycles."
             </div>
           </div>
 
           {/* High-Impact Resume Bullets */}
           <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 card-subtle-shadow">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-base">Tailored Resume Experience Bullets</h3>
+              <h3 className="font-bold text-slate-900 dark:text-white text-base">Technical Project & Competency Bullets</h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Click copy to include these proven bullet points on your resume.</p>
             </div>
 
@@ -143,33 +143,33 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
             </div>
           </div>
 
-          {/* QA-to-SOC Terminology Translation Table */}
+          {/* Core Security Competency ➔ Practical Application Mapping Table */}
           <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 card-subtle-shadow">
-            <h3 className="font-bold text-slate-900 dark:text-white text-base">QA ➔ Cybersecurity Vocabulary Mapping</h3>
+            <h3 className="font-bold text-slate-900 dark:text-white text-base">Core Security Competency ➔ Practical Application Mapping</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 text-[10px] uppercase">
                   <tr>
-                    <th className="py-3 px-4">QA Testing Phrase</th>
-                    <th className="py-3 px-4 text-purple-700 dark:text-purple-400">Cybersecurity Resume Translation</th>
+                    <th className="py-3 px-4">Foundational Skill</th>
+                    <th className="py-3 px-4 text-purple-700 dark:text-purple-400">SOC Analyst Resume & Interview Impact</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-300">
                   <tr>
-                    <td className="py-3 px-4">Writing bug reports</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Authoring High-Fidelity Incident & Defect Triage Reports</td>
+                    <td className="py-3 px-4">Log Analysis & Filtering</td>
+                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">SIEM Log Ingestion, Querying (SPL/KQL), and High-Fidelity Incident Triage</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Postman API Testing</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">API Security Assessment, Rate-Limiting & Auth Bypass Testing</td>
+                    <td className="py-3 px-4">API & Web Testing</td>
+                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">API Security Auditing, Rate-Limiting Validation & Auth Bypass Testing</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Burp Suite Proxy Interception</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Web Traffic Interception & Insecure Direct Object Reference (IDOR) Validation</td>
+                    <td className="py-3 px-4">Proxy & Network Inspection</td>
+                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Traffic Interception, Insecure Direct Object Reference (IDOR) & Header Hardening</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Edge-case testing</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Threat Modeling, Negative Input Fuzzing & Anomaly Discovery</td>
+                    <td className="py-3 px-4">Edge-Case & Negative Analysis</td>
+                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Threat Modeling, Anomaly Detection & Adversarial Attack Surface Minimization</td>
                   </tr>
                 </tbody>
               </table>
