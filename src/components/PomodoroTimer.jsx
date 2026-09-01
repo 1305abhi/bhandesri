@@ -4,7 +4,7 @@ import {
   Play, 
   Pause, 
   RotateCcw, 
-  X
+  X 
 } from 'lucide-react';
 
 export default function PomodoroTimer({ isOpen, onClose, onAddStudyTime }) {
@@ -22,11 +22,11 @@ export default function PomodoroTimer({ isOpen, onClose, onAddStudyTime }) {
       setIsRunning(false);
       if (mode === 'focus') {
         onAddStudyTime(25);
-        alert('🎉 Focus Session Completed! Take a 5-minute break.');
+        alert('Focus Session Completed! Take a 5-minute break.');
         setMode('shortBreak');
         setTimeLeft(5 * 60);
       } else {
-        alert('Break ended! Ready to dive back in?');
+        alert('Break ended! Ready to focus?');
         setMode('focus');
         setTimeLeft(25 * 60);
       }
@@ -49,58 +49,51 @@ export default function PomodoroTimer({ isOpen, onClose, onAddStudyTime }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-[#0c1222] border border-amber-300 dark:border-amber-500/40 rounded-3xl max-w-sm w-full p-6 text-center space-y-6 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="card-minimal rounded-2xl max-w-xs w-full p-5 text-center space-y-4 shadow-xl relative">
         
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 p-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-900"
+          className="absolute right-3.5 top-3.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
         >
           <X className="w-4 h-4" />
         </button>
 
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-100 dark:bg-amber-500/10 border border-amber-300 dark:border-amber-500/30 text-amber-800 dark:text-amber-400 text-[11px] font-mono font-bold">
-            <Clock className="w-3.5 h-3.5" />
-            <span>POMODORO STUDY TIMER</span>
-          </div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white font-mono">Deep Focus Mode</h3>
+        <div className="space-y-0.5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Study Timer</h3>
+          <p className="text-xs text-slate-400">Pomodoro focus intervals</p>
         </div>
 
-        <div className="flex items-center justify-center gap-1.5 bg-slate-100 dark:bg-slate-950 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs font-mono">
+        <div className="flex items-center justify-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-lg text-xs font-medium">
           <button
             onClick={() => setTimerMode('focus', 25)}
-            className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-              mode === 'focus' ? 'bg-amber-500 text-slate-950 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+            className={`px-3 py-1 rounded-md transition-colors ${
+              mode === 'focus' ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-semibold' : 'text-slate-500'
             }`}
           >
             Focus (25m)
           </button>
           <button
             onClick={() => setTimerMode('shortBreak', 5)}
-            className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-              mode === 'shortBreak' ? 'bg-amber-500 text-slate-950 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+            className={`px-3 py-1 rounded-md transition-colors ${
+              mode === 'shortBreak' ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-semibold' : 'text-slate-500'
             }`}
           >
             Break (5m)
           </button>
         </div>
 
-        <div className="text-5xl sm:text-6xl font-black text-amber-600 dark:text-amber-400 font-mono tracking-widest py-3">
+        <div className="text-4xl font-bold font-mono text-slate-900 dark:text-white tracking-wider py-2">
           {formatTime(timeLeft)}
         </div>
 
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-2">
           <button
             onClick={() => setIsRunning(!isRunning)}
-            className={`px-6 py-2.5 rounded-xl font-mono font-bold text-xs flex items-center gap-2 shadow-sm transition-all ${
-              isRunning 
-                ? 'bg-rose-600 hover:bg-rose-500 text-white' 
-                : 'bg-amber-500 hover:bg-amber-400 text-slate-950'
-            }`}
+            className="px-4 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-medium flex items-center gap-1.5"
           >
-            {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-slate-950" />}
-            <span>{isRunning ? 'Pause Timer' : 'Start Focus'}</span>
+            {isRunning ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+            <span>{isRunning ? 'Pause' : 'Start'}</span>
           </button>
 
           <button
@@ -108,16 +101,12 @@ export default function PomodoroTimer({ isOpen, onClose, onAddStudyTime }) {
               setIsRunning(false);
               setTimeLeft(mode === 'focus' ? 25 * 60 : 5 * 60);
             }}
-            className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900"
-            title="Reset Timer"
+            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-900"
+            title="Reset"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-3.5 h-3.5" />
           </button>
         </div>
-
-        <p className="text-[11px] text-slate-500 font-mono">
-          Each 25-minute focus interval builds your study streak & discipline.
-        </p>
 
       </div>
     </div>

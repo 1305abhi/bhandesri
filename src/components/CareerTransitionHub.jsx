@@ -2,24 +2,19 @@ import React, { useState } from 'react';
 import { 
   Briefcase, 
   FileText, 
-  Award, 
   HelpCircle, 
   Terminal, 
   Check, 
   Copy, 
   ChevronDown, 
   ChevronUp, 
-  Sparkles, 
-  Layers,
-  ArrowRight,
-  Shield,
-  Search
+  Search 
 } from 'lucide-react';
 import { INTERVIEW_QUESTIONS_DATA, INTERVIEW_CATEGORIES } from '../data/interviewQuestionsData';
 import { LAB_PROJECTS_DATA } from '../data/labProjectsData';
 
 export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
-  const [activeTab, setActiveTab] = useState('resume'); // 'resume', 'labs', 'interview'
+  const [activeTab, setActiveTab] = useState('resume');
   const [selectedInterviewCategory, setSelectedInterviewCategory] = useState('All');
   const [expandedQuestionId, setExpandedQuestionId] = useState(null);
   const [interviewSearch, setInterviewSearch] = useState('');
@@ -62,37 +57,34 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
   return (
     <div className="space-y-6 pb-20">
       
-      {/* Top Banner */}
-      <div className="bg-white dark:bg-[#120e29] border border-slate-200 dark:border-purple-500/30 rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 card-subtle-shadow">
+      {/* Header */}
+      <div className="card-minimal rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse" />
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white font-mono flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-              <span>CYBERSECURITY ANALYST CAREER & INTERVIEW ACCELERATOR</span>
-            </h1>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Everything you need to land your first SOC Analyst / Junior Cyber Security job: resume bullets, lab portfolio, and 50+ interview Q&As.
+          <h1 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Briefcase className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+            <span>Career & Interview Accelerator</span>
+          </h1>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Technical resume bullets, home lab blueprints, and 50+ curated interview Q&As.
           </p>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
           {[
-            { id: 'resume', label: '📄 Resume Strategy', icon: FileText },
-            { id: 'labs', label: '🧪 Home Lab Projects', icon: Terminal },
-            { id: 'interview', label: '🎯 50+ Interview Q&A', icon: HelpCircle }
+            { id: 'resume', label: 'Resume Strategy', icon: FileText },
+            { id: 'labs', label: 'Home Lab Projects', icon: Terminal },
+            { id: 'interview', label: '50+ Interview Q&A', icon: HelpCircle }
           ].map(tab => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                   activeTab === tab.id
-                    ? 'bg-purple-600 text-white shadow-sm'
-                    : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900'
+                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+                    : 'border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -105,71 +97,70 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
 
       {/* TAB 1: RESUME STRATEGY */}
       {activeTab === 'resume' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           
-          <div className="bg-white dark:bg-[#0b101e] border border-purple-200 dark:border-purple-500/30 rounded-3xl p-6 sm:p-8 space-y-4 card-subtle-shadow">
-            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <span>Recommended Resume Professional Summary Formula</span>
+          <div className="card-minimal rounded-2xl p-6 space-y-2">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Professional Summary Template
             </h2>
-            <div className="p-5 rounded-2xl bg-purple-50/70 dark:bg-slate-950 border border-purple-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed font-sans font-medium">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-sans">
               "Cybersecurity Analyst with strong practical foundations in Network Defense, SIEM Log Correlation (Splunk & Wazuh), Packet Inspection (Wireshark), Endpoint Telemetry (Sysmon), and Web Vulnerability Assessment (OWASP Top 10). Proven track record analyzing authentication anomalies, brute-force intrusions, and API authorization flaws. Experienced in architecting virtualized home SOC detection pipelines and investigating incident alert lifecycles."
-            </div>
+            </p>
           </div>
 
-          {/* High-Impact Resume Bullets */}
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 card-subtle-shadow">
+          {/* Bullets */}
+          <div className="card-minimal rounded-2xl p-6 space-y-3">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-base">Technical Project & Competency Bullets</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Click copy to include these proven bullet points on your resume.</p>
+              <h3 className="font-semibold text-slate-900 dark:text-white text-sm">Project & Competency Bullets</h3>
+              <p className="text-xs text-slate-500">Copy these bullet points to adapt to your technical resume.</p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               {resumeBullets.map((item, idx) => (
-                <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-purple-400 transition-all space-y-2 card-subtle-shadow">
+                <div key={idx} className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-purple-700 dark:text-purple-300">{item.title}</span>
+                    <span className="font-mono text-xs font-semibold text-slate-900 dark:text-white">{item.title}</span>
                     <button
                       onClick={() => handleCopyBullet(item.bullet, idx)}
-                      className="px-3 py-1 rounded-lg bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 hover:border-purple-400 text-slate-700 dark:text-slate-300 text-[11px] font-mono font-bold flex items-center gap-1 transition-all"
+                      className="px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px] font-mono flex items-center gap-1"
                     >
-                      {copiedBulletIdx === idx ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                      {copiedBulletIdx === idx ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
                       <span>{copiedBulletIdx === idx ? 'Copied' : 'Copy'}</span>
                     </button>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">{item.bullet}</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">{item.bullet}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Core Security Competency ➔ Practical Application Mapping Table */}
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 card-subtle-shadow">
-            <h3 className="font-bold text-slate-900 dark:text-white text-base">Core Security Competency ➔ Practical Application Mapping</h3>
+          {/* Competency Table */}
+          <div className="card-minimal rounded-2xl p-6 space-y-3">
+            <h3 className="font-semibold text-slate-900 dark:text-white text-sm">Security Competency ➔ Interview Impact</h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-500 text-[10px] uppercase">
+              <table className="w-full text-left text-xs font-sans">
+                <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-500 text-[11px]">
                   <tr>
-                    <th className="py-3 px-4">Foundational Skill</th>
-                    <th className="py-3 px-4 text-purple-700 dark:text-purple-400">SOC Analyst Resume & Interview Impact</th>
+                    <th className="py-2.5 px-3.5 font-medium">Foundational Skill</th>
+                    <th className="py-2.5 px-3.5 font-medium">SOC Analyst Impact</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-800 dark:text-slate-300">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                   <tr>
-                    <td className="py-3 px-4">Log Analysis & Filtering</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">SIEM Log Ingestion, Querying (SPL/KQL), and High-Fidelity Incident Triage</td>
+                    <td className="py-2.5 px-3.5 font-medium">Log Analysis & Filtering</td>
+                    <td className="py-2.5 px-3.5">SIEM Ingestion, SPL/KQL Queries, and High-Fidelity Alert Triaging</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">API & Web Testing</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">API Security Auditing, Rate-Limiting Validation & Auth Bypass Testing</td>
+                    <td className="py-2.5 px-3.5 font-medium">API & Web Auditing</td>
+                    <td className="py-2.5 px-3.5">Security Testing, Rate-Limiting Validation & Authentication Bypass Remediation</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Proxy & Network Inspection</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Traffic Interception, Insecure Direct Object Reference (IDOR) & Header Hardening</td>
+                    <td className="py-2.5 px-3.5 font-medium">Network Traffic Inspection</td>
+                    <td className="py-2.5 px-3.5">Traffic Interception, Insecure Object References (IDOR) & Header Hardening</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4">Edge-Case & Negative Analysis</td>
-                    <td className="py-3 px-4 text-purple-900 dark:text-purple-300 font-bold font-sans">Threat Modeling, Anomaly Detection & Adversarial Attack Surface Minimization</td>
+                    <td className="py-2.5 px-3.5 font-medium">Negative & Anomaly Analysis</td>
+                    <td className="py-2.5 px-3.5">Threat Modeling, IOC Discovery & Adversarial Surface Minimization</td>
                   </tr>
                 </tbody>
               </table>
@@ -179,65 +170,62 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
         </div>
       )}
 
-      {/* TAB 2: HOME LAB PROJECTS */}
+      {/* TAB 2: LABS */}
       {activeTab === 'labs' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {LAB_PROJECTS_DATA.map((lab) => {
             const isCompleted = progress.completedLabs.includes(lab.id);
 
             return (
-              <div key={lab.id} className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 card-subtle-shadow">
-                <div className="flex flex-wrap items-start justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+              <div key={lab.id} className="card-minimal rounded-2xl p-6 space-y-4">
+                <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
                   <div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2.5 py-0.5 rounded-md bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 text-[11px] font-mono font-bold">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[10px] font-mono font-semibold text-slate-500">
                         {lab.badge}
                       </span>
-                      <span className="text-xs text-slate-500 font-mono font-semibold">
-                        Estimated: {lab.estimatedHours} Hours • {lab.difficulty}
+                      <span className="text-xs text-slate-400">
+                        {lab.estimatedHours} Hours • {lab.difficulty}
                       </span>
                     </div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">{lab.title}</h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{lab.overview}</p>
+                    <h2 className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">{lab.title}</h2>
+                    <p className="text-xs text-slate-500 mt-0.5">{lab.overview}</p>
                   </div>
 
                   <button
                     onClick={() => toggleLabCompleted(lab.id)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                       isCompleted 
-                        ? 'bg-emerald-600 text-white shadow-sm' 
-                        : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-purple-400'
+                        ? 'bg-emerald-600 text-white' 
+                        : 'border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
                     }`}
                   >
-                    {isCompleted ? 'Lab Completed ✓' : 'Mark Lab Completed'}
+                    {isCompleted ? 'Completed ✓' : 'Mark Completed'}
                   </button>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-slate-900 text-cyan-300 font-mono text-xs whitespace-pre-wrap">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block mb-1">Architecture Topology:</span>
+                <div className="p-3.5 rounded-xl bg-[#0d1117] text-emerald-300 font-mono text-xs whitespace-pre-wrap leading-relaxed">
+                  <span className="text-[10px] text-slate-400 uppercase block mb-1">Topology:</span>
                   {lab.architecture}
                 </div>
 
-                <div className="space-y-3">
-                  <h3 className="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider font-mono">Step-by-Step Build Guide:</h3>
-                  <div className="grid grid-cols-1 gap-2.5">
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-slate-900 dark:text-white text-xs">Build Steps:</h3>
+                  <div className="space-y-1.5">
                     {lab.stepByStepGuide.map(step => (
-                      <div key={step.step} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1">
-                        <div className="flex items-center gap-2 font-mono text-xs font-bold text-purple-700 dark:text-purple-300">
-                          <span className="w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-950 border border-purple-300 dark:border-purple-500/40 flex items-center justify-center text-[10px]">
-                            {step.step}
-                          </span>
-                          <span>{step.title}</span>
-                        </div>
-                        <p className="text-xs text-slate-700 dark:text-slate-300 pl-7">{step.details}</p>
+                      <div key={step.step} className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-0.5 text-xs">
+                        <span className="font-semibold text-slate-900 dark:text-white block">
+                          Step {step.step}: {step.title}
+                        </span>
+                        <p className="text-slate-600 dark:text-slate-400 text-[11px]">{step.details}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-500/30 text-xs text-purple-900 dark:text-purple-200 space-y-1 font-sans">
-                  <span className="font-bold text-purple-700 dark:text-purple-400 font-mono text-[10px] block">MATCHING RESUME BULLET:</span>
-                  <p className="font-medium">{lab.resumeBullet}</p>
+                <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-0.5">
+                  <strong className="text-slate-900 dark:text-white block">Resume Bullet:</strong>
+                  <p>{lab.resumeBullet}</p>
                 </div>
               </div>
             );
@@ -245,31 +233,31 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
         </div>
       )}
 
-      {/* TAB 3: 50+ INTERVIEW QUESTIONS */}
+      {/* TAB 3: 50+ QUESTIONS */}
       {activeTab === 'interview' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           
-          <div className="bg-white dark:bg-[#0b101c] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-4 card-subtle-shadow">
+          <div className="card-minimal rounded-2xl p-4 space-y-3">
             <div className="relative">
-              <Search className="w-4 h-4 text-purple-600 dark:text-purple-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={interviewSearch}
                 onChange={(e) => setInterviewSearch(e.target.value)}
-                placeholder="Search 50+ technical and behavioral SOC interview questions..."
-                className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-purple-500"
+                placeholder="Search 50+ interview questions..."
+                className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-slate-400"
               />
             </div>
 
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+            <div className="flex items-center gap-1 overflow-x-auto pb-1 no-scrollbar text-xs">
               {INTERVIEW_CATEGORIES.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setSelectedInterviewCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold whitespace-nowrap transition-all ${
+                  className={`px-3 py-1 rounded-lg font-medium whitespace-nowrap transition-colors ${
                     selectedInterviewCategory === cat
-                      ? 'bg-purple-600 text-white shadow-sm'
-                      : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:text-slate-900 border border-slate-200 dark:border-slate-800'
+                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+                      : 'border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400'
                   }`}
                 >
                   {cat}
@@ -278,46 +266,45 @@ export default function CareerTransitionHub({ progress, toggleLabCompleted }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {filteredQuestions.map((q, idx) => {
               const isExpanded = expandedQuestionId === q.id;
 
               return (
                 <div
                   key={q.id}
-                  className="bg-white dark:bg-[#0b101c] border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden transition-all card-subtle-shadow"
+                  className="card-minimal rounded-xl overflow-hidden"
                 >
                   <div
                     onClick={() => setExpandedQuestionId(isExpanded ? null : q.id)}
-                    className="p-4 sm:p-5 flex items-start justify-between gap-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors"
+                    className="p-4 flex items-start justify-between gap-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"
                   >
-                    <div className="space-y-1.5">
+                    <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-950 border border-purple-300 dark:border-purple-500/30 text-purple-800 dark:text-purple-300">
-                          {q.category}
+                        <span className="text-[10px] font-mono text-slate-400">
+                          {q.category} • Q#{idx + 1}
                         </span>
-                        <span className="text-slate-400 text-xs font-mono font-semibold">Q#{idx + 1}</span>
                       </div>
-                      <h3 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-snug">{q.question}</h3>
+                      <h3 className="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm">{q.question}</h3>
                     </div>
 
-                    <button className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 shrink-0 mt-1">
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    <button className="p-1 rounded text-slate-400">
+                      {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                     </button>
                   </div>
 
                   {isExpanded && (
-                    <div className="px-5 pb-5 pt-1 space-y-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/40 text-xs leading-relaxed animate-fadeIn">
-                      <div className="flex flex-wrap items-center gap-1.5 pt-2">
-                        <span className="text-[11px] font-mono text-purple-700 dark:text-purple-400 font-bold">Key Terms:</span>
+                    <div className="px-4 pb-4 pt-1 space-y-2.5 border-t border-slate-100 dark:border-slate-800 text-xs animate-fadeIn">
+                      <div className="flex flex-wrap items-center gap-1 pt-1.5">
+                        <span className="text-[10px] text-slate-400">Keywords:</span>
                         {q.keywords.map((kw, i) => (
-                          <span key={i} className="text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sky-700 dark:text-cyan-300 font-mono font-semibold">
+                          <span key={i} className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono">
                             {kw}
                           </span>
                         ))}
                       </div>
 
-                      <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-sans text-xs sm:text-sm leading-relaxed">
+                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 whitespace-pre-wrap font-sans leading-relaxed">
                         {q.answer}
                       </div>
                     </div>

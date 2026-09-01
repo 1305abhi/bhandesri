@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 import { 
   Terminal, 
   Search, 
-  Filter, 
-  AlertTriangle, 
-  CheckCircle2, 
-  Shield, 
+  BarChart2, 
   ChevronDown, 
   ChevronUp, 
-  Sparkles,
-  BarChart2,
   Copy
 } from 'lucide-react';
 
@@ -43,14 +38,13 @@ export default function SiemSimulator() {
   const [showStats, setShowStats] = useState(false);
 
   const presets = [
-    { label: 'Brute Force Attempts (4625 / Failed)', q: '4625 OR Failed' },
-    { label: 'High-Severity Anti-Forensics (1102 / Cleared)', q: '1102 OR cleared' },
-    { label: 'Unauthorized Account Creation (4720)', q: '4720' },
-    { label: 'SQL Injection Signatures', q: 'UNION SELECT OR sqlmap' },
-    { label: 'Suspicious PowerShell Execution', q: 'powershell.exe' }
+    { label: 'Failed Logons (4625)', q: '4625 OR Failed' },
+    { label: 'Cleared Logs (1102)', q: '1102 OR cleared' },
+    { label: 'User Created (4720)', q: '4720' },
+    { label: 'SQL Injection', q: 'UNION SELECT OR sqlmap' },
+    { label: 'PowerShell Execution', q: 'powershell.exe' }
   ];
 
-  // Filtering
   const filteredLogs = RAW_LOG_DATA.filter(item => {
     if (selectedSource !== 'All' && item.source !== selectedSource) return false;
     
@@ -68,94 +62,85 @@ export default function SiemSimulator() {
 
   const getSeverityBadge = (sev) => {
     switch (sev) {
-      case 'Critical': return 'bg-rose-100 text-rose-800 dark:bg-red-500/20 dark:text-red-400 border-rose-300 dark:border-red-500/40 font-bold';
-      case 'High': return 'bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-400 border-amber-300 dark:border-amber-500/40 font-bold';
-      case 'Medium': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-400 border-yellow-300 dark:border-yellow-500/40 font-medium';
-      default: return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/40 font-medium';
+      case 'Critical': return 'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border-rose-200 dark:border-rose-900';
+      case 'High': return 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border-amber-200 dark:border-amber-900';
+      case 'Medium': return 'bg-yellow-50 text-yellow-700 dark:bg-yellow-950/40 dark:text-yellow-300 border-yellow-200 dark:border-yellow-900';
+      default: return 'bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700';
     }
   };
 
   return (
     <div className="space-y-6 pb-20">
       
-      {/* Header */}
-      <div className="bg-white dark:bg-[#0a0f1e] border border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 card-subtle-shadow">
+      {/* Minimal Header */}
+      <div className="card-minimal rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-500 dark:bg-cyan-400 animate-pulse" />
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white font-mono flex items-center gap-2">
-              <Terminal className="w-5 h-5 text-sky-600 dark:text-cyan-400" />
-              <span>SIEM LOG HUNTER & QUERY ENGINE</span>
-            </h1>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Simulate real Splunk SPL / Elastic KQL queries across Windows Event Logs, Sysmon, and Linux authentication logs.
+          <h1 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Terminal className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+            <span>SIEM Log Hunter</span>
+          </h1>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Query across Windows Security, Sysmon, and Linux authentication logs.
           </p>
         </div>
 
         <button
           onClick={() => setShowStats(!showStats)}
-          className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-sky-400 text-slate-700 dark:text-cyan-300 text-xs font-mono font-semibold flex items-center gap-2"
+          className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1.5"
         >
-          <BarChart2 className="w-4 h-4" />
-          <span>{showStats ? 'Hide Aggregates' : 'View SPL Stats'}</span>
+          <BarChart2 className="w-3.5 h-3.5" />
+          <span>{showStats ? 'Hide Aggregation' : 'View Stats'}</span>
         </button>
       </div>
 
-      {/* Query Bar & Presets */}
-      <div className="bg-white dark:bg-[#0c1222] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-4 card-subtle-shadow">
+      {/* Query Bar */}
+      <div className="card-minimal rounded-2xl p-4 space-y-3">
         
-        {/* Search Query Input */}
         <div className="relative">
-          <Search className="w-4 h-4 text-sky-600 dark:text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder='Enter SPL / Search filter (e.g., "EventID=4625", "198.51.100.42", "powershell", "UNION SELECT")...'
-            className="w-full pl-10 pr-20 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 focus:border-sky-500 text-xs text-slate-900 dark:text-cyan-200 placeholder-slate-400 font-mono focus:outline-none"
+            placeholder='Filter logs (e.g. "4625", "198.51.100.42", "powershell", "UNION SELECT")...'
+            className="w-full pl-8 pr-16 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 font-mono focus:outline-none focus:border-slate-400"
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] text-slate-500 hover:text-slate-900 px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-slate-700"
             >
               Clear
             </button>
           )}
         </div>
 
-        {/* Quick Query Presets */}
-        <div className="space-y-1.5">
-          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono font-semibold flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-sky-600 dark:text-cyan-400" />
-            <span>Threat Hunting Presets:</span>
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {presets.map((p, idx) => (
-              <button
-                key={idx}
-                onClick={() => setQuery(p.q)}
-                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-400 text-slate-700 dark:text-slate-300 text-[11px] font-mono transition-all font-medium"
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
+        {/* Presets */}
+        <div className="flex flex-wrap items-center gap-1.5 text-xs">
+          <span className="text-[11px] text-slate-400">Presets:</span>
+          {presets.map((p, idx) => (
+            <button
+              key={idx}
+              onClick={() => setQuery(p.q)}
+              className="px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-[11px] text-slate-600 dark:text-slate-400 font-mono"
+            >
+              {p.label}
+            </button>
+          ))}
         </div>
 
-        {/* Source Selector Pills */}
+        {/* Source Selector */}
         <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span className="text-[11px] text-slate-400">Source:</span>
             {['All', 'Windows Security', 'Linux auth.log', 'Apache Access', 'Sysmon'].map(src => (
               <button
                 key={src}
                 onClick={() => setSelectedSource(src)}
-                className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono whitespace-nowrap transition-all ${
+                className={`px-2 py-0.5 rounded-md text-[11px] font-mono whitespace-nowrap transition-colors ${
                   selectedSource === src
-                    ? 'bg-sky-100 text-sky-800 dark:bg-cyan-950 dark:text-cyan-300 border border-sky-300 dark:border-cyan-500/40 font-bold'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                    ? 'bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900 font-semibold'
+                    : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
                 {src}
@@ -163,59 +148,55 @@ export default function SiemSimulator() {
             ))}
           </div>
 
-          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono shrink-0">
-            {filteredLogs.length} Events Matched
+          <span className="text-[11px] font-mono text-slate-400 shrink-0">
+            {filteredLogs.length} Events
           </span>
         </div>
       </div>
 
       {/* Aggregate Stats Section */}
       {showStats && (
-        <div className="bg-white dark:bg-[#0d1528] border border-slate-200 dark:border-cyan-500/30 rounded-3xl p-5 space-y-3 animate-fadeIn card-subtle-shadow">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold text-slate-900 dark:text-white font-mono flex items-center gap-2">
-              <BarChart2 className="w-4 h-4 text-sky-600 dark:text-cyan-400" />
-              <span>SPL AGGREGATION: | stats count by src_ip, user, severity</span>
-            </h3>
-            <span className="text-[10px] text-slate-400 font-mono">Calculated from current view</span>
-          </div>
+        <div className="card-minimal rounded-2xl p-4 space-y-2.5 animate-fadeIn">
+          <h3 className="text-xs font-semibold text-slate-900 dark:text-white">
+            Log Aggregation Summary
+          </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-[10px] text-slate-500 block uppercase font-bold">Top Attacking IP</span>
-              <span className="text-rose-600 dark:text-red-400 font-bold text-sm block mt-1">198.51.100.42</span>
-              <span className="text-[10px] text-slate-400">3 Failed Logons (Brute Force)</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+            <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+              <span className="text-[10px] text-slate-500 block uppercase font-medium">Top Attacking IP</span>
+              <span className="font-mono font-semibold text-rose-600 dark:text-rose-400 text-xs block mt-0.5">198.51.100.42</span>
+              <span className="text-[10px] text-slate-400">3 Failed Logons</span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-[10px] text-slate-500 block uppercase font-bold">High-Risk Users Targeted</span>
-              <span className="text-amber-600 dark:text-amber-400 font-bold text-sm block mt-1">administrator, root</span>
+            <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+              <span className="text-[10px] text-slate-500 block uppercase font-medium">Targeted Accounts</span>
+              <span className="font-mono font-semibold text-slate-900 dark:text-white text-xs block mt-0.5">administrator, root</span>
               <span className="text-[10px] text-slate-400">Privileged Accounts</span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-[10px] text-slate-500 block uppercase font-bold">Critical Event Triggers</span>
-              <span className="text-purple-600 dark:text-purple-400 font-bold text-sm block mt-1">Event 4720 & 1102</span>
-              <span className="text-[10px] text-slate-400">Backdoor Account + Audit Cleared</span>
+            <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+              <span className="text-[10px] text-slate-500 block uppercase font-medium">Critical Event Triggers</span>
+              <span className="font-mono font-semibold text-slate-900 dark:text-white text-xs block mt-0.5">Event 4720 & 1102</span>
+              <span className="text-[10px] text-slate-400">Account Created + Audit Cleared</span>
             </div>
           </div>
         </div>
       )}
 
       {/* Log Events Table */}
-      <div className="bg-white dark:bg-[#0b101c] border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden card-subtle-shadow">
+      <div className="card-minimal rounded-2xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-slate-50 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase text-[10px] tracking-wider">
+            <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-500 text-[10px] uppercase">
               <tr>
-                <th className="py-3 px-4">Timestamp (UTC)</th>
-                <th className="py-3 px-4">Source</th>
-                <th className="py-3 px-4">Host</th>
-                <th className="py-3 px-4">Event ID / Code</th>
-                <th className="py-3 px-4">User</th>
-                <th className="py-3 px-4">Source IP</th>
-                <th className="py-3 px-4">Severity</th>
-                <th className="py-3 px-4 text-right">Raw</th>
+                <th className="py-2.5 px-3.5">Timestamp</th>
+                <th className="py-2.5 px-3.5">Source</th>
+                <th className="py-2.5 px-3.5">Host</th>
+                <th className="py-2.5 px-3.5">Event ID</th>
+                <th className="py-2.5 px-3.5">User</th>
+                <th className="py-2.5 px-3.5">Source IP</th>
+                <th className="py-2.5 px-3.5">Severity</th>
+                <th className="py-2.5 px-3.5 text-right">Details</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-slate-700 dark:text-slate-300">
@@ -226,47 +207,42 @@ export default function SiemSimulator() {
                     <React.Fragment key={log.id}>
                       <tr 
                         onClick={() => setExpandedLogId(isExpanded ? null : log.id)}
-                        className="hover:bg-slate-50 dark:hover:bg-slate-900/60 cursor-pointer transition-colors"
+                        className="hover:bg-slate-50 dark:hover:bg-slate-900/50 cursor-pointer transition-colors"
                       >
-                        <td className="py-3 px-4 whitespace-nowrap text-slate-500">{log.time}</td>
-                        <td className="py-3 px-4 whitespace-nowrap font-semibold text-sky-700 dark:text-cyan-300">{log.source}</td>
-                        <td className="py-3 px-4 whitespace-nowrap text-slate-800 dark:text-slate-200">{log.host}</td>
-                        <td className="py-3 px-4 whitespace-nowrap">
-                          <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold text-slate-800 dark:text-cyan-400">
-                            {log.eventId}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 whitespace-nowrap font-bold text-slate-900 dark:text-slate-200">{log.user}</td>
-                        <td className="py-3 px-4 whitespace-nowrap text-slate-600 dark:text-slate-400">{log.srcIp}</td>
-                        <td className="py-3 px-4 whitespace-nowrap">
-                          <span className={`px-2 py-0.5 rounded-md border text-[10px] ${getSeverityBadge(log.severity)}`}>
+                        <td className="py-2 px-3.5 whitespace-nowrap text-slate-400">{log.time}</td>
+                        <td className="py-2 px-3.5 whitespace-nowrap font-medium text-slate-900 dark:text-slate-100">{log.source}</td>
+                        <td className="py-2 px-3.5 whitespace-nowrap text-slate-600 dark:text-slate-400">{log.host}</td>
+                        <td className="py-2 px-3.5 whitespace-nowrap font-semibold">{log.eventId}</td>
+                        <td className="py-2 px-3.5 whitespace-nowrap">{log.user}</td>
+                        <td className="py-2 px-3.5 whitespace-nowrap text-slate-500">{log.srcIp}</td>
+                        <td className="py-2 px-3.5 whitespace-nowrap">
+                          <span className={`px-1.5 py-0.2 rounded border text-[10px] font-medium ${getSeverityBadge(log.severity)}`}>
                             {log.severity}
                           </span>
                         </td>
-                        <td className="py-3 px-4 text-right">
-                          <button className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-900">
+                        <td className="py-2 px-3.5 text-right">
+                          <button className="p-0.5 rounded text-slate-400 hover:text-slate-900">
                             {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                           </button>
                         </td>
                       </tr>
 
-                      {/* Expandable Raw Log Detail */}
                       {isExpanded && (
-                        <tr className="bg-slate-50 dark:bg-slate-950/90 border-t border-slate-200 dark:border-slate-800">
-                          <td colSpan={8} className="p-4 space-y-2">
+                        <tr className="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+                          <td colSpan={8} className="p-3.5 space-y-1.5">
                             <div className="flex items-center justify-between text-[11px] text-slate-500">
-                              <span className="font-bold text-sky-700 dark:text-cyan-400">RAW SECURITY LOG PAYLOAD:</span>
+                              <span className="font-semibold">Raw Log Payload:</span>
                               <button 
                                 onClick={() => navigator.clipboard.writeText(log.raw)}
-                                className="flex items-center gap-1 hover:text-sky-600 font-medium"
+                                className="flex items-center gap-1 hover:text-slate-900"
                               >
                                 <Copy className="w-3 h-3" />
-                                <span>Copy Log</span>
+                                <span>Copy</span>
                               </button>
                             </div>
-                            <div className="p-3 rounded-xl bg-slate-900 text-emerald-400 text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed font-mono">
+                            <pre className="p-3 rounded-lg bg-[#0d1117] text-emerald-400 text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed font-mono">
                               {log.raw}
-                            </div>
+                            </pre>
                           </td>
                         </tr>
                       )}
@@ -275,8 +251,8 @@ export default function SiemSimulator() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-slate-400">
-                    No log events matched your search query. Try typing `4625` or selecting `All`.
+                  <td colSpan={8} className="py-6 text-center text-slate-400">
+                    No log events matched your query.
                   </td>
                 </tr>
               )}

@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import { 
   Crosshair, 
-  Shield, 
-  Lock, 
-  AlertTriangle, 
   CheckCircle2, 
-  Code, 
-  Terminal, 
-  Zap, 
-  Sparkles,
-  Server
+  AlertTriangle 
 } from 'lucide-react';
 
 export default function OwaspPlayground() {
-  const [activeLab, setActiveLab] = useState('sqli'); // 'sqli', 'xss', 'idor', 'headers'
+  const [activeLab, setActiveLab] = useState('sqli');
 
   // --- SQLi State ---
   const [sqlInput, setSqlInput] = useState("admin' OR '1'='1");
@@ -37,44 +30,41 @@ export default function OwaspPlayground() {
   });
 
   const mockUsersDb = {
-    102: { id: 102, name: 'John Doe (You)', role: 'Employee', salary: '$55,000', ssn: '***-**-1042' },
-    103: { id: 103, name: 'Alice Smith (CEO)', role: 'Executive', salary: '$320,000', ssn: '984-21-9901' },
-    104: { id: 104, name: 'Robert Chen (CFO)', role: 'Executive', salary: '$290,000', ssn: '741-92-3814' }
+    102: { id: 102, name: 'John Doe (You)', role: 'Employee', salary: '$55,000' },
+    103: { id: 103, name: 'Alice Smith (CEO)', role: 'Executive', salary: '$320,000' },
+    104: { id: 104, name: 'Robert Chen (CFO)', role: 'Executive', salary: '$290,000' }
   };
 
   return (
     <div className="space-y-6 pb-20">
       
-      {/* Top Banner */}
-      <div className="bg-white dark:bg-[#0f0e24] border border-slate-200 dark:border-red-500/30 rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 card-subtle-shadow">
+      {/* Header */}
+      <div className="card-minimal rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white font-mono flex items-center gap-2">
-              <Crosshair className="w-5 h-5 text-rose-600 dark:text-red-400" />
-              <span>OWASP TOP 10 INTERACTIVE SECURITY PLAYGROUND</span>
-            </h1>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Test real web vulnerabilities (SQLi, XSS, IDOR, Headers) and observe how defensive controls fix them in code.
+          <h1 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Crosshair className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+            <span>OWASP Security Playground</span>
+          </h1>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Test web vulnerability payloads (SQLi, XSS, IDOR, Headers) and observe defensive fixes.
           </p>
         </div>
 
         {/* Lab Switcher */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
           {[
             { id: 'sqli', label: '1. SQL Injection' },
-            { id: 'xss', label: '2. Cross-Site Scripting (XSS)' },
-            { id: 'idor', label: '3. Broken Auth / IDOR' },
-            { id: 'headers', label: '4. Security Headers' }
+            { id: 'xss', label: '2. XSS' },
+            { id: 'idor', label: '3. IDOR' },
+            { id: 'headers', label: '4. Headers' }
           ].map(lab => (
             <button
               key={lab.id}
               onClick={() => setActiveLab(lab.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold whitespace-nowrap transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                 activeLab === lab.id
-                  ? 'bg-rose-600 text-white shadow-sm'
-                  : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900'
+                  ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+                  : 'border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400'
               }`}
             >
               {lab.label}
@@ -83,91 +73,89 @@ export default function OwaspPlayground() {
         </div>
       </div>
 
-      {/* LAB 1: SQL INJECTION */}
+      {/* LAB 1: SQLi */}
       {activeLab === 'sqli' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 font-mono text-xs card-subtle-shadow">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <span className="font-bold text-rose-600 dark:text-red-400 text-sm">SQL INJECTION (SQLi) LAB</span>
-              <span className="text-slate-400">CWE-89</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="card-minimal rounded-2xl p-5 space-y-4 font-mono text-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+              <span className="font-semibold text-slate-900 dark:text-white text-xs">SQL Injection (CWE-89)</span>
+              <span className="text-slate-400">Payload input</span>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-slate-700 dark:text-slate-400 font-bold block">Login Username Input Payload:</label>
+              <label className="text-slate-600 dark:text-slate-400 font-medium block">Username Input:</label>
               <input
                 type="text"
                 value={sqlInput}
                 onChange={(e) => setSqlInput(e.target.value)}
-                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-rose-700 dark:text-red-300 font-mono text-xs focus:border-rose-500 focus:outline-none"
+                className="w-full p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-slate-400"
               />
-              <div className="flex gap-2 pt-1">
-                <button onClick={() => setSqlInput("admin' OR '1'='1")} className="text-[10px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-rose-600 font-bold border border-slate-200 dark:border-slate-800">admin' OR '1'='1</button>
-                <button onClick={() => setSqlInput("1' UNION SELECT username,password FROM users--")} className="text-[10px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-rose-600 font-bold border border-slate-200 dark:border-slate-800">UNION SELECT</button>
+              <div className="flex gap-1.5 pt-1">
+                <button onClick={() => setSqlInput("admin' OR '1'='1")} className="text-[10px] px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400">admin' OR '1'='1</button>
+                <button onClick={() => setSqlInput("1' UNION SELECT username,password FROM users--")} className="text-[10px] px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400">UNION SELECT</button>
               </div>
             </div>
 
             {/* Defense Toggle */}
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-1.5">
               <div className="flex items-center justify-between">
-                <span className="text-slate-900 dark:text-white font-bold">Defensive Mode:</span>
+                <span className="font-medium text-slate-800 dark:text-slate-200">Defense Mode:</span>
                 <button
                   onClick={() => setUseParameterized(!useParameterized)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                    useParameterized 
-                      ? 'bg-emerald-600 text-white' 
-                      : 'bg-rose-100 text-rose-800 dark:bg-red-500/20 dark:text-red-400 border border-rose-300 dark:border-red-500/40'
+                  className={`px-2.5 py-1 rounded text-xs font-medium ${
+                    useParameterized ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                   }`}
                 >
-                  {useParameterized ? '✅ Parameterized Queries ON' : '❌ Vulnerable String Concat'}
+                  {useParameterized ? 'Parameterized ON' : 'String Concat'}
                 </button>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                Prepared statements treat untrusted input as literal data strings instead of executable SQL syntax.
+              <p className="text-[11px] text-slate-500 font-sans">
+                Prepared statements treat untrusted input strictly as literal parameter data.
               </p>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 font-mono text-xs card-subtle-shadow">
-            <span className="font-bold text-sky-700 dark:text-cyan-400 text-sm block border-b border-slate-100 dark:border-slate-800 pb-3">
-              BACKEND DATABASE QUERY EXECUTION
+          <div className="card-minimal rounded-2xl p-5 space-y-3 font-mono text-xs">
+            <span className="font-semibold text-slate-900 dark:text-white text-xs block border-b border-slate-100 dark:border-slate-800 pb-2">
+              Database Execution
             </span>
 
-            <div className="p-4 rounded-2xl bg-slate-900 text-xs text-slate-300 space-y-2">
-              <span className="text-[10px] text-slate-500 block uppercase font-bold">Compiled SQL Query:</span>
+            <div className="p-3.5 rounded-xl bg-[#0d1117] text-xs space-y-1">
+              <span className="text-[10px] text-slate-400 block uppercase font-medium">Executed SQL:</span>
               {!useParameterized ? (
-                <div className="text-rose-400 font-bold whitespace-pre-wrap">
+                <div className="text-rose-400 font-semibold whitespace-pre-wrap">
                   SELECT * FROM users WHERE username = '{sqlInput}' AND password = '***';
                 </div>
               ) : (
-                <div className="text-emerald-400 font-bold whitespace-pre-wrap">
-                  PREPARED STATEMENT: SELECT * FROM users WHERE username = ? AND password = ?<br />
+                <div className="text-emerald-400 font-semibold whitespace-pre-wrap">
+                  SELECT * FROM users WHERE username = ? AND password = ?<br />
                   PARAMS: ['{sqlInput}', '***']
                 </div>
               )}
             </div>
 
-            <div className={`p-4 rounded-2xl border ${
+            <div className={`p-3.5 rounded-xl border ${
               !useParameterized && sqlInput.includes("'") 
-                ? 'bg-rose-50 border-rose-300 text-rose-900 dark:bg-red-950/40 dark:border-red-500 dark:text-red-200' 
-                : 'bg-emerald-50 border-emerald-300 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-500 dark:text-emerald-200'
+                ? 'border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200' 
+                : 'border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200'
             }`}>
-              <div className="flex items-center gap-2 font-bold mb-1">
+              <div className="flex items-center gap-1.5 font-semibold mb-0.5">
                 {!useParameterized && sqlInput.includes("'") ? (
                   <>
-                    <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-red-400" />
-                    <span>AUTHENTICATION BYPASSED! (Logged in as Administrator)</span>
+                    <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
+                    <span>Auth Bypass Triggered (Exploited)</span>
                   </>
                 ) : (
                   <>
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                    <span>LOGIN REJECTED (Safe: Input treated as literal username string)</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Protected (Safe parameter isolation)</span>
                   </>
                 )}
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-300">
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
                 {!useParameterized && sqlInput.includes("'")
-                  ? "Because untrusted input was concatenated, the 'OR 1=1' condition evaluated to TRUE for all database rows."
-                  : "The database safely isolated parameters from query logic. No SQL injection occurred."}
+                  ? "Untrusted string input changed the SQL query structure."
+                  : "Input was evaluated as parameter data only. Query structure was preserved."}
               </p>
             </div>
           </div>
@@ -176,82 +164,75 @@ export default function OwaspPlayground() {
 
       {/* LAB 2: XSS */}
       {activeLab === 'xss' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 font-mono text-xs card-subtle-shadow">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <span className="font-bold text-rose-600 dark:text-red-400 text-sm">STORED / REFLECTED XSS LAB</span>
-              <span className="text-slate-400">CWE-79</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="card-minimal rounded-2xl p-5 space-y-3 font-mono text-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+              <span className="font-semibold text-slate-900 dark:text-white">Cross-Site Scripting (CWE-79)</span>
+              <span className="text-slate-400">Input</span>
             </div>
+
+            <textarea
+              value={xssInput}
+              onChange={(e) => setXssInput(e.target.value)}
+              rows={3}
+              className="w-full p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none resize-none"
+            />
 
             <div className="space-y-1.5">
-              <label className="text-slate-700 dark:text-slate-400 font-bold block">User Comment Payload:</label>
-              <textarea
-                value={xssInput}
-                onChange={(e) => setXssInput(e.target.value)}
-                rows={3}
-                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-amber-800 dark:text-amber-300 font-mono text-xs focus:border-amber-500 focus:outline-none resize-none"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-800 dark:text-slate-200 font-medium">Output HTML Entity Encoding</span>
+              <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-700 dark:text-slate-300">HTML Entity Encoding</span>
                 <button
                   onClick={() => setEnableEncoding(!enableEncoding)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                    enableEncoding ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                  className={`px-2.5 py-0.5 rounded text-xs font-medium ${
+                    enableEncoding ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600'
                   }`}
                 >
-                  {enableEncoding ? 'Enabled' : 'Disabled'}
+                  {enableEncoding ? 'Active' : 'Off'}
                 </button>
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-800 dark:text-slate-200 font-medium">Set-Cookie: HttpOnly Flag</span>
+              <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-700 dark:text-slate-300">Cookie HttpOnly Flag</span>
                 <button
                   onClick={() => setEnableHttpOnly(!enableHttpOnly)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                    enableHttpOnly ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                  className={`px-2.5 py-0.5 rounded text-xs font-medium ${
+                    enableHttpOnly ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600'
                   }`}
                 >
-                  {enableHttpOnly ? 'Protected' : 'No HttpOnly'}
+                  {enableHttpOnly ? 'Active' : 'Off'}
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 font-mono text-xs card-subtle-shadow">
-            <span className="font-bold text-sky-700 dark:text-cyan-400 text-sm block border-b border-slate-100 dark:border-slate-800 pb-3">
-              CLIENT-SIDE BROWSER DOM EXECUTION
+          <div className="card-minimal rounded-2xl p-5 space-y-3 font-mono text-xs">
+            <span className="font-semibold text-slate-900 dark:text-white block border-b border-slate-100 dark:border-slate-800 pb-2">
+              Browser Render
             </span>
 
-            <div className="p-4 rounded-2xl bg-slate-900 text-slate-200 space-y-2">
-              <span className="text-[10px] text-slate-400 block uppercase font-bold">Rendered Page Preview:</span>
-              <div className="p-3 rounded-xl bg-slate-950 text-slate-200">
-                {enableEncoding ? (
-                  <span className="text-emerald-400">{xssInput.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>
-                ) : (
-                  <span className="text-rose-400">[Executing Unsanitized Script in Browser Context]</span>
-                )}
-              </div>
+            <div className="p-3.5 rounded-xl bg-[#0d1117] text-xs">
+              <span className="text-[10px] text-slate-400 block mb-1">Output in DOM:</span>
+              {enableEncoding ? (
+                <span className="text-emerald-400">{xssInput.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>
+              ) : (
+                <span className="text-rose-400">[Unsanitized Script Executing in Browser]</span>
+              )}
             </div>
 
-            <div className={`p-4 rounded-2xl border ${
+            <div className={`p-3.5 rounded-xl border ${
               !enableEncoding && !enableHttpOnly 
-                ? 'bg-rose-50 border-rose-300 text-rose-900 dark:bg-red-950/40 dark:border-red-500 dark:text-red-200' 
-                : 'bg-emerald-50 border-emerald-300 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-500 dark:text-emerald-200'
+                ? 'border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/30' 
+                : 'border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/30'
             }`}>
-              <span className="font-bold block mb-1">
-                {!enableEncoding && !enableHttpOnly 
-                  ? '🚨 SESSION COOKIE STOLEN VIA JAVASCRIPT!' 
-                  : '🛡️ DEFENSES ACTIVE (Cookie Protected / Script Encoded)'}
+              <span className="font-semibold block mb-0.5">
+                {!enableEncoding && !enableHttpOnly ? 'Cookie Leak Vulnerable' : 'Defenses Active'}
               </span>
-              <p className="text-[11px] text-slate-600 dark:text-slate-300">
+              <p className="text-[11px] text-slate-500 font-sans">
                 {!enableEncoding && !enableHttpOnly
-                  ? "Attacker script accessed document.cookie and transmitted it to attacker server."
+                  ? "JavaScript can access document.cookie."
                   : enableHttpOnly
-                  ? "HttpOnly blocked JavaScript from reading document.cookie."
-                  : "HTML entity encoding turned `<` into `&lt;`, neutralizing injection."}
+                  ? "HttpOnly flag blocks JavaScript cookie reads."
+                  : "HTML encoding neutralizes executable script tags."}
               </p>
             </div>
           </div>
@@ -260,106 +241,96 @@ export default function OwaspPlayground() {
 
       {/* LAB 3: IDOR */}
       {activeLab === 'idor' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 font-mono text-xs card-subtle-shadow">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <span className="font-bold text-rose-600 dark:text-red-400 text-sm">INSECURE DIRECT OBJECT REFERENCE (IDOR)</span>
-              <span className="text-slate-400">CWE-639</span>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-300 space-y-1">
-              <span className="text-[10px] text-sky-700 dark:text-cyan-400 block font-bold">CURRENT AUTHENTICATED SESSION:</span>
-              <p>Logged in as: <strong>John Doe (User ID #102)</strong></p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="card-minimal rounded-2xl p-5 space-y-3 font-mono text-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+              <span className="font-semibold text-slate-900 dark:text-white">IDOR (CWE-639)</span>
+              <span className="text-slate-400">User #102</span>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-slate-700 dark:text-slate-400 font-bold block">Tamper API Parameter (Target User ID):</label>
-              <div className="flex items-center gap-2">
+              <label className="text-slate-600 dark:text-slate-400 block">Requested Object ID:</label>
+              <div className="flex items-center gap-1.5">
                 {[102, 103, 104].map(id => (
                   <button
                     key={id}
                     onClick={() => setTargetUserId(id)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all ${
+                    className={`px-2.5 py-1 rounded-lg border text-xs font-mono font-medium ${
                       targetUserId === id 
-                        ? 'bg-sky-600 text-white shadow-sm' 
-                        : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold' 
+                        : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50'
                     }`}
                   >
-                    /api/profile?user_id={id}
+                    user_id={id}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-slate-800 dark:text-slate-200 font-medium">Server-Side Authorization Check:</span>
+            <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span className="text-slate-700 dark:text-slate-300">Server Authorization Check</span>
               <button
                 onClick={() => setEnableServerAuthCheck(!enableServerAuthCheck)}
-                className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                  enableServerAuthCheck ? 'bg-emerald-600 text-white' : 'bg-rose-100 text-rose-800 dark:bg-red-500/20 dark:text-red-400 border border-rose-300 dark:border-red-500/40'
+                className={`px-2.5 py-0.5 rounded text-xs font-medium ${
+                  enableServerAuthCheck ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600'
                 }`}
               >
-                {enableServerAuthCheck ? 'Enforced' : 'Missing (Vulnerable)'}
+                {enableServerAuthCheck ? 'Enforced' : 'Missing'}
               </button>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 font-mono text-xs card-subtle-shadow">
-            <span className="font-bold text-sky-700 dark:text-cyan-400 text-sm block border-b border-slate-100 dark:border-slate-800 pb-3">
-              API SERVER RESPONSE
+          <div className="card-minimal rounded-2xl p-5 space-y-3 font-mono text-xs">
+            <span className="font-semibold text-slate-900 dark:text-white block border-b border-slate-100 dark:border-slate-800 pb-2">
+              API Server Response
             </span>
 
             {enableServerAuthCheck && targetUserId !== 102 ? (
-              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-900 dark:bg-emerald-950/30 dark:border-emerald-500 dark:text-emerald-300 space-y-2">
-                <span className="font-bold text-sm block">HTTP/1.1 403 FORBIDDEN</span>
-                <p className="text-xs">
-                  {`{"error": "Access Denied: Authenticated User #102 is not authorized to view User #${targetUserId}'s record."}`}
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                <span className="font-semibold text-xs block text-slate-900 dark:text-white">HTTP 403 Forbidden</span>
+                <p className="text-[11px] mt-0.5 font-sans">
+                  Unauthorized: User #102 cannot access User #{targetUserId}'s record.
                 </p>
               </div>
             ) : (
-              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-200 space-y-2">
-                <span className="text-emerald-400 font-bold block">HTTP/1.1 200 OK</span>
-                <pre className="text-xs text-sky-300">
+              <div className="p-3.5 rounded-xl bg-[#0d1117] border border-slate-800 text-slate-200 space-y-1">
+                <span className="text-emerald-400 font-semibold block">HTTP 200 OK</span>
+                <pre className="text-xs text-slate-300">
                   {JSON.stringify(mockUsersDb[targetUserId], null, 2)}
                 </pre>
-                {targetUserId !== 102 && !enableServerAuthCheck && (
-                  <div className="p-3 rounded-xl bg-rose-950/80 border border-rose-500/40 text-rose-300 text-[11px] mt-2 font-sans font-medium">
-                    ⚠️ CRITICAL: Private salary and SSN for {mockUsersDb[targetUserId].name} leaked without authorization!
-                  </div>
-                )}
               </div>
             )}
           </div>
         </div>
       )}
 
-      {/* LAB 4: SECURITY HEADERS */}
+      {/* LAB 4: HEADERS */}
       {activeLab === 'headers' && (
-        <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 card-subtle-shadow">
-          <div className="border-b border-slate-100 dark:border-slate-800 pb-3">
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm">HTTP Security Headers Configuration Lab</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Toggle defensive HTTP response headers and observe the protection score.</p>
+        <div className="card-minimal rounded-2xl p-5 space-y-3">
+          <div className="border-b border-slate-100 dark:border-slate-800 pb-2">
+            <h3 className="text-xs font-semibold text-slate-900 dark:text-white">Security Headers Config</h3>
+            <p className="text-xs text-slate-500">Toggle HTTP response security headers</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {[
-              { key: 'csp', name: 'Content-Security-Policy', desc: 'Restricts script sources to self; defeats XSS injections.', val: headers.csp },
-              { key: 'hsts', name: 'Strict-Transport-Security', desc: 'Forces browser to only load site via HTTPS for 1 year.', val: headers.hsts },
-              { key: 'xfo', name: 'X-Frame-Options: DENY', desc: 'Prevents page from rendering in hidden iframes (Clickjacking).', val: headers.xfo },
-              { key: 'nosniff', name: 'X-Content-Type-Options', desc: 'Blocks MIME-type sniffing by browsers.', val: headers.nosniff }
+              { key: 'csp', name: 'Content-Security-Policy', desc: 'Restricts script execution sources.', val: headers.csp },
+              { key: 'hsts', name: 'Strict-Transport-Security', desc: 'Enforces HTTPS communication.', val: headers.hsts },
+              { key: 'xfo', name: 'X-Frame-Options: DENY', desc: 'Prevents iframe clickjacking.', val: headers.xfo },
+              { key: 'nosniff', name: 'X-Content-Type-Options', desc: 'Blocks MIME-type sniffing.', val: headers.nosniff }
             ].map(h => (
-              <div key={h.key} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start justify-between gap-3">
-                <div className="space-y-1">
-                  <span className="font-mono font-bold text-sky-700 dark:text-cyan-400 text-xs block">{h.name}</span>
-                  <p className="text-slate-600 dark:text-slate-400 text-xs">{h.desc}</p>
+              <div key={h.key} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 flex items-start justify-between gap-2">
+                <div className="space-y-0.5">
+                  <span className="font-mono font-semibold text-xs text-slate-900 dark:text-white block">{h.name}</span>
+                  <p className="text-slate-500 text-xs">{h.desc}</p>
                 </div>
                 <button
                   onClick={() => setHeaders(prev => ({ ...prev, [h.key]: !prev[h.key] }))}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold shrink-0 ${
-                    h.val ? 'bg-emerald-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
+                  className={`px-2 py-0.5 rounded text-xs font-medium shrink-0 ${
+                    h.val ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
                   }`}
                 >
-                  {h.val ? 'Active' : 'Missing'}
+                  {h.val ? 'On' : 'Off'}
                 </button>
               </div>
             ))}

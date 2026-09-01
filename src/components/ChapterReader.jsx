@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, 
-  ArrowRight, 
   CheckCircle2, 
   Bookmark, 
   Clock, 
   BookOpen, 
   Terminal, 
-  Sparkles, 
   Copy, 
   Check, 
   HelpCircle, 
   FileText, 
   ChevronLeft, 
   ChevronRight, 
-  Lightbulb, 
-  Award,
-  ShieldCheck 
+  ShieldCheck,
+  Award 
 } from 'lucide-react';
 import { QUIZZES_DATA } from '../data/quizData';
 import MarkdownRenderer from './MarkdownRenderer';
@@ -54,275 +51,250 @@ export default function ChapterReader({
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 pb-24">
+    <div className="max-w-4xl mx-auto space-y-6 pb-24">
       
-      {/* Top Header & Navigation Breadcrumb */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0a1020] border border-slate-200 dark:border-cyan-500/20 p-4 rounded-2xl card-subtle-shadow">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 card-minimal rounded-xl p-3.5">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToRoadmap}
-            className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-sky-400 text-slate-700 dark:text-slate-300 transition-all"
+            className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 transition-colors"
             title="Back to Roadmap"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           
           <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-sky-700 dark:text-cyan-400 font-bold">
+            <div className="flex items-center gap-2 text-xs font-mono text-slate-500">
               <span>Month {dayItem.month}</span>
               <span>•</span>
               <span>Week {dayItem.week}</span>
               <span>•</span>
-              <span className="text-slate-900 dark:text-white">Day {dayItem.day} of 90</span>
+              <span className="font-semibold text-slate-900 dark:text-white">Day {dayItem.day} of 90</span>
             </div>
-            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-sans font-medium">{dayItem.category}</span>
+            <span className="text-[11px] text-slate-500">{dayItem.category}</span>
           </div>
         </div>
 
         {/* Action Controls */}
-        <div className="flex flex-wrap items-center gap-2">
-          
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => toggleBookmark(`day-${dayItem.day}`)}
-            className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-medium flex items-center gap-1.5 transition-colors ${
               isBookmarked 
-                ? 'bg-amber-100 border-amber-300 text-amber-800 dark:bg-amber-500/10 dark:border-amber-500/40 dark:text-amber-400'
-                : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-300' 
+                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400'
             }`}
           >
             <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-amber-500' : ''}`} />
-            <span>{isBookmarked ? 'Bookmarked' : 'Bookmark'}</span>
+            <span>{isBookmarked ? 'Saved' : 'Save'}</span>
           </button>
 
           <button
             onClick={() => toggleDayCompletion(`day-${dayItem.day}`)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors ${
               isDone
-                ? 'bg-emerald-600 dark:bg-cyan-500 text-white dark:text-slate-950 shadow-sm'
-                : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-sky-500'
+                ? 'bg-emerald-600 text-white'
+                : 'border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
             }`}
           >
-            <CheckCircle2 className="w-4 h-4" />
-            <span>{isDone ? 'Mastered ✓' : 'Mark Done'}</span>
+            <CheckCircle2 className="w-3.5 h-3.5" />
+            <span>{isDone ? 'Completed' : 'Mark Done'}</span>
           </button>
 
           {hasQuiz && (
             <button
               onClick={() => onOpenQuiz(dayItem.quizId)}
-              className="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
+              className="px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-medium flex items-center gap-1.5"
             >
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>{quizResult ? `Quiz: ${quizResult.score}%` : 'Take Quiz'}</span>
+              <span>{quizResult ? `Quiz: ${quizResult.score}%` : 'Quiz'}</span>
             </button>
           )}
-
         </div>
       </div>
 
       {/* Main Chapter Title Banner */}
-      <div className="bg-white dark:bg-[#0b1224] border border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6 sm:p-8 space-y-3 card-subtle-shadow">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-md bg-sky-100 dark:bg-cyan-500/10 border border-sky-300 dark:border-cyan-500/30 text-sky-800 dark:text-cyan-300 text-xs font-mono font-bold">
-            MISSION DAY #{dayItem.day}
+      <div className="card-minimal rounded-2xl p-6 space-y-2">
+        <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
+          <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">
+            DAY {dayItem.day}
           </span>
-          <span className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-xs flex items-center gap-1 font-mono font-medium">
+          <span className="flex items-center gap-1">
             <Clock className="w-3 h-3" />
-            {dayItem.estimatedMinutes} Mins Study
+            {dayItem.estimatedMinutes} Mins
           </span>
-          <span className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-xs font-mono font-medium">
-            Level: {dayItem.difficulty}
-          </span>
+          <span>•</span>
+          <span>{dayItem.difficulty}</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
           {dayItem.title}
         </h1>
 
-        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
           {dayItem.summary}
         </p>
       </div>
 
       {/* Content Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 overflow-x-auto no-scrollbar">
+      <div className="flex items-center gap-1 border-b border-slate-200 dark:border-slate-800 pb-2 overflow-x-auto no-scrollbar text-xs">
         <button
           onClick={() => setActiveTab('theory')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+          className={`px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
             activeTab === 'theory'
-              ? 'bg-sky-500 text-white shadow-xs'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
-          <BookOpen className="w-4 h-4" />
-          <span>Core Theory & Architecture</span>
+          <BookOpen className="w-3.5 h-3.5" />
+          <span>Core Theory</span>
         </button>
 
         <button
           onClick={() => setActiveTab('practical-context')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+          className={`px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
             activeTab === 'practical-context'
-              ? 'bg-purple-600 text-white shadow-xs'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
-          <ShieldCheck className="w-4 h-4" />
-          <span>Real-World SOC Application</span>
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>Defender Context</span>
         </button>
 
         {dayItem.codeSnippet && (
           <button
             onClick={() => setActiveTab('code')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+            className={`px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
               activeTab === 'code'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
+                ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
-            <Terminal className="w-4 h-4" />
-            <span>Practical Commands & Scripts</span>
+            <Terminal className="w-3.5 h-3.5" />
+            <span>Commands & Code</span>
           </button>
         )}
 
         <button
           onClick={() => setActiveTab('cheatsheet')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+          className={`px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
             activeTab === 'cheatsheet'
-              ? 'bg-amber-500 text-slate-950 shadow-xs'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
-          <Award className="w-4 h-4" />
-          <span>Cheat Sheet & Exercise</span>
+          <Award className="w-3.5 h-3.5" />
+          <span>Cheat Sheet</span>
         </button>
 
         <button
           onClick={() => setActiveTab('notes')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+          className={`px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
             activeTab === 'notes'
-              ? 'bg-blue-600 text-white shadow-xs'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
-          <FileText className="w-4 h-4" />
-          <span>My Notes {noteText ? '•' : ''}</span>
+          <FileText className="w-3.5 h-3.5" />
+          <span>Notes {noteText ? '•' : ''}</span>
         </button>
       </div>
 
-      {/* Tab 1: Core Theory Rendered via MarkdownRenderer */}
+      {/* Tab 1: Core Theory */}
       {activeTab === 'theory' && (
-        <div className="bg-white dark:bg-[#0b101e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 card-subtle-shadow">
+        <div className="card-minimal rounded-2xl p-6 sm:p-8">
           <MarkdownRenderer content={dayItem.theory} />
         </div>
       )}
 
-      {/* Tab 2: Real-World SOC Application */}
+      {/* Tab 2: Real-World Defender Context */}
       {activeTab === 'practical-context' && (
-        <div className="bg-white dark:bg-[#0c1024] border border-purple-200 dark:border-purple-500/30 rounded-3xl p-6 sm:p-8 space-y-6 card-subtle-shadow">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-purple-100 dark:bg-purple-500/20 border border-purple-300 dark:border-purple-500/40 flex items-center justify-center text-purple-700 dark:text-purple-400">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Real-World Security Mindset & Defender Context</h2>
-              <p className="text-xs text-purple-700 dark:text-purple-300 font-medium">Connecting foundational concepts directly to enterprise SOC analyst workflows</p>
-            </div>
+        <div className="card-minimal rounded-2xl p-6 space-y-4">
+          <div className="space-y-1">
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Real-World Defender Insight</h2>
+            <p className="text-xs text-slate-500">Connecting this chapter's concept to enterprise SOC analyst workflows</p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20 text-slate-800 dark:text-slate-200 text-sm leading-relaxed space-y-3">
-            <p className="font-semibold text-purple-900 dark:text-purple-200">{dayItem.qaBridge}</p>
-            <p className="text-xs text-slate-600 dark:text-slate-300">
-              <strong>Interview & Recruiter Strategy Tip:</strong> When interviewers ask about this concept, demonstrate a proactive defender mindset by explaining both the detection methodology and how engineering teams remediate the vulnerability at root cause.
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed space-y-3 font-sans">
+            <p className="font-medium text-slate-900 dark:text-white">{dayItem.qaBridge}</p>
+            <p className="text-xs text-slate-500">
+              <strong>Interview & Investigation Tip:</strong> When evaluating alerts related to this topic, explain both the detection indicator and how engineers address the root-cause vulnerability.
             </p>
           </div>
         </div>
       )}
 
-      {/* Tab 3: Practical Commands & Code */}
+      {/* Tab 3: Commands & Code */}
       {activeTab === 'code' && dayItem.codeSnippet && (
-        <div className="bg-white dark:bg-[#0a0f1d] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 card-subtle-shadow">
+        <div className="card-minimal rounded-2xl p-6 space-y-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">{dayItem.codeSnippet.title}</h3>
-            </div>
+            <h3 className="text-xs font-semibold text-slate-900 dark:text-white">{dayItem.codeSnippet.title}</h3>
             <button
               onClick={() => handleCopyCode(dayItem.codeSnippet.code)}
-              className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-emerald-500 text-slate-700 dark:text-slate-300 text-xs flex items-center gap-1.5 transition-all font-mono"
+              className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Copied!' : 'Copy Code'}</span>
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
 
-          <div className="relative rounded-2xl bg-slate-900 dark:bg-slate-950 border border-slate-800 p-4 overflow-x-auto font-mono text-xs text-emerald-300 leading-relaxed">
-            <pre>{dayItem.codeSnippet.code}</pre>
-          </div>
+          <pre className="p-4 rounded-xl bg-[#0d1117] border border-slate-800 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed">
+            <code>{dayItem.codeSnippet.code}</code>
+          </pre>
         </div>
       )}
 
-      {/* Tab 4: Cheat Sheet & Practical Mission */}
+      {/* Tab 4: Cheat Sheet */}
       {activeTab === 'cheatsheet' && (
-        <div className="space-y-6">
-          <div className="bg-white dark:bg-[#0c1222] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 card-subtle-shadow">
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
-              <Award className="w-4 h-4 text-amber-500 dark:text-amber-400" />
-              <span>Key Takeaways & Interview Cheat Sheet</span>
-            </h3>
+        <div className="space-y-4">
+          <div className="card-minimal rounded-2xl p-6 space-y-3">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Key Takeaways</h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {dayItem.cheatSheet.map((item, idx) => (
-                <div key={idx} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="font-bold text-sky-700 dark:text-cyan-400 font-mono text-xs block">{item.key}</span>
-                  <span className="text-slate-700 dark:text-slate-300 text-xs leading-relaxed block">{item.val}</span>
+                <div key={idx} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-0.5">
+                  <span className="font-mono text-xs font-semibold text-slate-900 dark:text-white block">{item.key}</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs block">{item.val}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-sky-50 dark:bg-[#0d1629] border border-sky-200 dark:border-cyan-500/30 rounded-3xl p-6 space-y-3 card-subtle-shadow">
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-sky-600 dark:text-cyan-400" />
-              <span>Today's Hands-On Mission</span>
-            </h3>
-            <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+          <div className="card-minimal rounded-2xl p-5 space-y-1.5">
+            <h3 className="text-xs font-semibold text-slate-900 dark:text-white">Today's Practice Mission</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               {dayItem.practicalExercise}
             </p>
           </div>
         </div>
       )}
 
-      {/* Tab 5: Personal Notes */}
+      {/* Tab 5: Notes */}
       {activeTab === 'notes' && (
-        <div className="bg-white dark:bg-[#0b101c] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-4 card-subtle-shadow">
+        <div className="card-minimal rounded-2xl p-6 space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
-              <FileText className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-              <span>Personal Chapter Notes</span>
-            </h3>
+            <h3 className="text-xs font-semibold text-slate-900 dark:text-white">Personal Chapter Notes</h3>
             {noteSaved && (
-              <span className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-mono font-bold">
-                <Check className="w-3.5 h-3.5" />
-                Saved to LocalStorage
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 font-mono">
+                Saved ✓
               </span>
             )}
           </div>
-
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Write your thoughts, command notes, or questions to revisit later.
-          </p>
 
           <textarea
             value={noteText}
             onChange={(e) => setNoteText(e.target.value)}
             placeholder="Type your notes for Day "
             rows={8}
-            className="w-full rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 p-4 text-xs text-slate-900 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-sky-500 font-mono leading-relaxed resize-y"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-3.5 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-slate-400 font-mono leading-relaxed resize-y"
           />
 
           <div className="flex justify-end">
             <button
               onClick={handleSaveNote}
-              className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm transition-all"
+              className="px-4 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-medium"
             >
               Save Notes
             </button>
@@ -331,11 +303,11 @@ export default function ChapterReader({
       )}
 
       {/* Bottom Navigation Bar */}
-      <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+      <div className="flex items-center justify-between pt-2">
         <button
           disabled={dayItem.day <= 1}
           onClick={() => onNavigateDay(dayItem.day - 1)}
-          className="px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 disabled:opacity-30 disabled:cursor-not-allowed text-xs text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-1.5 transition-all card-subtle-shadow"
+          className="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed text-xs text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>Previous (Day {dayItem.day - 1})</span>
@@ -344,7 +316,7 @@ export default function ChapterReader({
         <button
           disabled={dayItem.day >= 90}
           onClick={() => onNavigateDay(dayItem.day + 1)}
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all"
+          className="px-4 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium text-xs flex items-center gap-1 transition-colors"
         >
           <span>Next (Day {dayItem.day + 1})</span>
           <ChevronRight className="w-4 h-4" />
